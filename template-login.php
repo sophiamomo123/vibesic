@@ -1,7 +1,6 @@
 <?php
 /**
  * Template Name: Login Vibesic
- * Description: Page de connexion au style Vibesic
  */
 
 // Traitement de la connexion
