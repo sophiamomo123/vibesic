@@ -43,6 +43,10 @@ get_header();
 
 <div class="vibesic-frontpage">
     <?php if (is_user_logged_in()) : ?>
+<div class="background-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/background-blob.png" alt="">
+</div>
+
         <!-- Version connectée -->
         <main class="vibesic-main">
             <div id="homeViewConnected">
@@ -52,8 +56,8 @@ get_header();
                 
                 <h1 class="main-title">
                     <span class="highlight">Découvrez</span><br>
-                    la musique instrumentale par votre<br>
-                    humeur du jour
+                    la musique instrumentale par <br>
+                    votre humeur du jour
                 </h1>
                 
                 <div class="action-buttons">
@@ -63,10 +67,14 @@ get_header();
         </main>
         
     <?php else : ?>
+        <div class="background-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/background-blob.png" alt="">
+</div>
         <!-- Version non connectée -->
         <main class="vibesic-main">
             <div id="homeView">
                 <h1 class="main-title">
+                    
                     <span class="highlight">Découvrez</span><br>
                     la musique instrumentale par<br>
                     votre humeur du jour
@@ -75,7 +83,9 @@ get_header();
                 <div class="action-buttons">
                     <a href="<?php echo home_url('/quiz'); ?>" class="btn btn-explore">EXPLORER</a>
                 </div>
-            </div>
+
+            </div>  
+
             
             <!-- Formulaire d'inscription (caché par défaut) -->
             <div id="signupForm" class="auth-form" style="display: none;">
@@ -113,8 +123,7 @@ get_header();
                             <a href="#" onclick="showLogin(); return false;">connectez-vous</a>
                         </div>
                     </form>
-                    <button onclick="backToHome()" class="btn btn-outline" style="margin-top: 20px;">RETOUR</button>
-                </div>
+                   
             </div>
             
             <!-- Formulaire de connexion (caché par défaut) -->
@@ -131,14 +140,12 @@ get_header();
                             <input type="password" name="pwd" id="pwd" required>
                         </div>
                         <input type="hidden" name="redirect_to" value="<?= esc_url(home_url('/quiz')); ?>">
-                        <button type="submit" class="btn btn-orange submit-btn">SE CONNECTER</button>
+                        <button type="submit" class="btn btn-orange submit-btn">CONNEXION</button>
                         <div class="form-footer">
                             Vous n'avez pas de compte ? 
                             <a href="#" onclick="showSignup(); return false;">inscrivez-vous</a>
                         </div>
-                    </form>
-                    <button onclick="backToHome()" class="btn btn-outline" style="margin-top: 20px;">RETOUR</button>
-                </div>
+                    </form> 
             </div>
         </main>
     <?php endif; ?>
@@ -197,6 +204,41 @@ get_header();
     background-color: #ffffff;
 }
 
+
+.vibesic-frontpage {
+    position: relative;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    top: -3%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1300px;
+    height: auto;
+    z-index: 0;
+    opacity: 2.7;
+    animation: blobFloat 15s ease-in-out infinite;
+}
+
+.background-image img {
+    width: 100%;
+    
+    height: auto;
+    filter: blur(20px);
+}
+
+@keyframes blobFloat {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(30px);
+    }
+}
+
+
 .vibesic-main {
     text-align: center;
     max-width: 1200px;
@@ -205,6 +247,8 @@ get_header();
     justify-content: center;
     align-items: center;
     padding-top: 72px;
+    position: relative;
+z-index: 1;
 }
 
 .welcome-message {
@@ -239,15 +283,20 @@ get_header();
 }
 
 .btn {
-    padding: 12px 30px;
+    padding: 10px 45px;
+    margin-top: 10px;
     border-radius: 25px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     transition: all 0.3s ease;
     display: inline-block;
     cursor: pointer;
     border: 2px solid transparent;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-explore {
@@ -265,6 +314,11 @@ get_header();
     background-color: #ff7f50;
     color: white;
     border: 2px solid #ff7f50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     padding: 10px 45px;
+
 }
 
 .btn-orange:hover {
@@ -309,7 +363,6 @@ get_header();
     background-color: white;
     padding: 50px;
     border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
 
@@ -351,6 +404,7 @@ get_header();
 .submit-btn {
     width: 100%;
     margin-top: 10px;
+    letter-spacing: 2px;
 }
 
 .form-footer {

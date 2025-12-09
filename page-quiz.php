@@ -26,7 +26,7 @@ get_header();
                 </button>
             </div>
             <div class="quiz-right">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/intro.png" alt="Avatars des émotions" class="avatars-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/humeurs.png" alt="Avatars des émotions" class="avatars-image">
 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@ get_header();
 }
 
 .quiz-title .highlight {
-    color: #ff7f50;
+    color: #F6843F;
 }
 
 .quiz-description {
@@ -87,6 +87,7 @@ get_header();
     padding: 15px 50px;
     font-size: 16px;
     border: none;
+    letter-spacing: 2px;
 }
 .quiz-right {
     display: flex;
@@ -98,8 +99,9 @@ get_header();
     max-width: 100%;
     width: 500px;
     height: auto;
-    border-radius: 15px;
+    border-radius: 25px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #000000ff;
 }
 
 @media (max-width: 1024px) {
@@ -116,16 +118,21 @@ get_header();
 }
 
 .btn-orange {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-    border: 2px solid #ff7f50;
+    border: 2px solid #F6843F;
     border-radius: 25px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 40px;
+    gap: 10px;
 }
 
 .btn-orange:hover {
-    background-color: #ff6a3d;
-    border-color: #ff6a3d;
+    background-color: #F6843F; 
+    border-color: #F6843F;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
     border-radius: 25px;

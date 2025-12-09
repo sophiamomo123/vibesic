@@ -28,6 +28,7 @@
 
         }
 
+        
         .vibesic-header {
             background-color: #ffffff;
             padding: 20px 50px;
@@ -39,18 +40,16 @@
             z-index: 1000;
         }
 
-       .vibesic-logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
-    
+        .vibesic-logo {
+    display: inline-block;
+    transition: opacity 0.3s;
 }
 
 .logo-image {
-    height: 60px;
+    height: 45px;
     width: auto;
-    display: block;
+}
+       
     
 }
 
@@ -83,6 +82,9 @@
             background-color: #ff7f50;
             color: white;
             border: 2px solid #ff7f50;
+            margin-left: 12px;
+            border-radius: 50px;
+            padding: 10px 30px;
         }
 
         .btn-orange:hover {
@@ -190,7 +192,7 @@
                 <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="header-btn btn-orange">SE DÉCONNECTER</a>
             <?php else : ?>
                 <a href="#" onclick="showSignup(); return false;" class="header-btn btn-orange">S'INSCRIRE</a>
-                <a href="#" onclick="showLogin(); return false;" class="header-btn btn-orange">SE CONNECTER</a>
+                <a href="#" onclick="showLogin(); return false;" class="header-btn btn-orange">CONNEXION</a>
             <?php endif; ?>
         </nav>
     </header>

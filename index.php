@@ -19,7 +19,9 @@ get_header();
                 instrumentale par votre<br>
                 humeur du jour
             </h1>
-            
+            <div class="background-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/background-blob.png" alt="">
+</div>
             <div class="action-buttons">
                 <a href="/explorer" class="btn btn-explore">EXPLORER</a>
                 <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="btn btn-logout">SE DÉCONNECTER</a>
@@ -52,7 +54,51 @@ get_header();
     padding: 50px 20px;
     background-color: #ffffffff;
 }
+.vibesic-frontpage {
+    position: relative;
+    overflow: hidden;
+}
 
+.background-image {
+    position: absolute;
+    top: -3%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1300px;
+    height: auto;
+    z-index: 0;
+    opacity: 2.1;
+    animation: blobFloat 15s ease-in-out infinite;
+}
+
+.background-image img {
+    width: 100%;
+    padding-top: 70px   ;
+    height: auto;
+    filter: blur(20px);
+}
+
+@keyframes blobFloat {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(30px);
+    }
+}
+
+
+.vibesic-main {
+    text-align: center;
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 72px;
+    position: relative;
+z-index: 1;
+}
 .vibesic-main {
     text-align: center;
     max-width: 1200px;
