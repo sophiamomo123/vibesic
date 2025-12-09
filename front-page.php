@@ -51,8 +51,8 @@ get_header();
                 </div>
                 
                 <h1 class="main-title">
-                    <span class="highlight">Découvrez</span> la musique<br>
-                    instrumentale par votre<br>
+                    <span class="highlight">Découvrez</span><br>
+                    la musique instrumentale par votre<br>
                     humeur du jour
                 </h1>
                 
@@ -113,6 +113,7 @@ get_header();
                             <a href="#" onclick="showLogin(); return false;">connectez-vous</a>
                         </div>
                     </form>
+                    <button onclick="backToHome()" class="btn btn-outline" style="margin-top: 20px;">RETOUR</button>
                 </div>
             </div>
             
@@ -136,10 +137,53 @@ get_header();
                             <a href="#" onclick="showSignup(); return false;">inscrivez-vous</a>
                         </div>
                     </form>
+                    <button onclick="backToHome()" class="btn btn-outline" style="margin-top: 20px;">RETOUR</button>
                 </div>
             </div>
         </main>
     <?php endif; ?>
+    
+    <!-- Section Objectifs -->
+    <section class="objectives-section">
+        <div class="objectives-container">
+            <h2 class="objectives-title">Nos objectifs ?</h2>
+            
+            <div class="objectives-cards">
+                <div class="objective-card">
+                    <h3 class="card-title">Fonctionnels</h3>
+                    <ul class="card-list">
+                        <li>Proposer une expérience musicale personnalisée</li>
+                        <li>Simplifier la découverte musicale</li>
+                        <li>Rendre l'expérience fun et intuitive</li>
+                        <li>Encourager un usage quotidien</li>
+                    </ul>
+                </div>
+                
+                <div class="objective-card">
+                    <h3 class="card-title">Utilisateurs</h3>
+                    <ul class="card-list">
+                        <li>Comprendre son humeur et se sentir accompagné</li>
+                        <li>Créer un espace personnel musical</li>
+                        <li>Découvrir, explorer, s'évader</li>
+                        <li>Vivre une expérience positive et personnalisée</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Inscription -->
+    <section class="signup-promo-section">
+        <div class="promo-container">
+            <div class="promo-text">
+                <h2>Inscris-toi en un clin d'œil et débloque l'accès complet à toute la bibliothèque !</h2>
+                <p>Feuillette, découvre, explore... et surtout enregistre tes musiques préférées pour les retrouver à tout moment.</p>
+            </div>
+            <div class="promo-image">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/character.png" alt="Personnage Vibesic">
+            </div>
+        </div>
+    </section>
 </div>
 
 <style>
@@ -160,6 +204,7 @@ get_header();
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 72px;
 }
 
 .welcome-message {
@@ -174,24 +219,15 @@ get_header();
 }
 
 .main-title {
-    font-size: 48px;
+    font-size: 57px;
     line-height: 1.3;
     margin-bottom: 40px;
     font-weight: bold;
-    color: #000;  
-    font-family: 'coolvetica', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    letter-spacing: 3px;
-     }     
-    
-.highlight {
-    color: #ff7f50;
-   
+    color: #000;
 }
+
 .main-title .highlight {
-    color: #ff7f50;
-    letter-spacing : 2px;
+    font-size: 78px;
 }
 
 .action-buttons {
@@ -273,7 +309,7 @@ get_header();
     background-color: white;
     padding: 50px;
     border-radius: 15px;
-    
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
 
@@ -364,6 +400,154 @@ get_header();
         padding: 30px 15px;
     }
 }
+
+/* Section Objectifs */
+.objectives-section {
+    background-color: #ffffff;
+    padding: 80px 20px;
+}
+
+.objectives-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.objectives-title {
+    font-size: 46px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 30px;
+    font-family: 'Coolvetica', Arial, sans-serif;
+}
+
+.objectives-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.objective-card {
+    background-color: #ff7f50;
+    padding: 50px 45px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-family: 'Coolvetica', Arial, sans-serif;
+    text-decoration: underline;
+}
+
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-list li {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 2;
+    margin-bottom: 18px;
+    padding-left: 30px;
+    position: relative;
+    font-weight: 500;
+}
+
+.card-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* Section Inscription Promo */
+.signup-promo-section {
+    background-color: #ffffff;
+    padding: 80px 20px;
+}
+
+.promo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.promo-text h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-family: 'Coolvetica', sans-serif;
+}
+
+.promo-text p {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    font-family:"Musticapro", sans-serif;
+}
+
+.promo-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.promo-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+}
+
+/* Responsive Objectifs */
+@media (max-width: 768px) {
+    .objectives-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+    
+    .objectives-cards {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .objective-card {
+        padding: 30px;
+    }
+    
+    .card-title {
+        font-size: 24px;
+    }
+    
+    .card-list li {
+        font-size: 15px;
+    }
+    
+    .promo-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .promo-text h2 {
+        font-size: 24px;
+    }
+    
+    .promo-text p {
+        font-size: 16px;
+    }
+}
 </style>
 
 <script>
@@ -399,3 +583,5 @@ function backToHome() {
 <?php
 get_footer();
 ?>
+
+

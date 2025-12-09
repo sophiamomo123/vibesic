@@ -201,6 +201,7 @@
     .footer-columns {
         grid-template-columns: 1fr;
         gap: 30px;
+         font-family:"Musticapro", sans-serif;
     }
     
     .footer-links {
