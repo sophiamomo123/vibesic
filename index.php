@@ -42,18 +42,6 @@ get_header();
     <?php endif; ?>
 </div>
 
-<div> 
-    <p>
-        voici la suite de mon projet
-    </p>
-</div>
-
-<div> 
-    <p>
-        voici la suite de mon projet
-    </p>
-</div>
-
 
 
 <style>
