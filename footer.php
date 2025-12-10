@@ -61,7 +61,7 @@
     font-style: normal;
 }
 .vibesic-footer {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     padding: 50px 0;
     margin-top: auto;
     width: 100%;

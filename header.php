@@ -79,29 +79,31 @@
         }
 
         .btn-orange {
-            background-color: #ff7f50;
+            background-color: #F6843F;
             color: white;
-            border: 2px solid #ff7f50;
+            border: 2px solid #F6843F;
             margin-left: 12px;
             border-radius: 50px;
-            padding: 10px 30px;
+            padding: 10px 45px;
+            gap: 10px;
+
         }
 
         .btn-orange:hover {
-            background-color: #ff6a3d;
-            border-color: #ff6a3d;
+            background-color: #F6843F
+            border-color: #F6843F;
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
         }
 
         .btn-outline {
             background-color: transparent;
-            color: #ff7f50;
-            border: 2px solid #ff7f50;
+            color: #F6843F;
+            border: 2px solid #F6843F;
         }
 
         .btn-outline:hover {
-            background-color: #ff7f50;
+            background-color: #F6843F;
             color: white;
         }
 
@@ -112,7 +114,7 @@
         }
 
         .user-welcome strong {
-            color: #ff7f50;
+            color: #F6843F;
         }
 
         /* Menu hamburger pour mobile */
@@ -121,7 +123,7 @@
             background: none;
             border: none;
             font-size: 24px;
-            color: #ff7f50;
+            color: #F6843F;
             cursor: pointer;
         }
 

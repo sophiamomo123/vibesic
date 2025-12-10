@@ -1,6 +1,7 @@
 <?php
 /**
- * Template Index - Page principale Vibesic
+ * Template  name : Front Page
+ * Description: Page d'accueil de Vibesic
  */
 
 get_header();
@@ -43,7 +44,47 @@ get_header();
         </main>
     <?php endif; ?>
 </div>
-
+    <!-- Section Objectifs -->
+    <section class="objectives-section">
+        <div class="objectives-container">
+            <h2 class="objectives-title">Nos objectifs ?</h2>
+            
+            <div class="objectives-cards">
+                <div class="objective-card">
+                    <h3 class="card-title">Fonctionnels</h3>
+                    <ul class="card-list">
+                        <li>Proposer une expérience musicale personnalisée</li>
+                        <li>Simplifier la découverte musicale</li>
+                        <li>Rendre l'expérience fun et intuitive</li>
+                        <li>Encourager un usage quotidien</li>
+                    </ul>
+                </div>
+                
+                <div class="objective-card">
+                    <h3 class="card-title">Utilisateurs</h3>
+                    <ul class="card-list">
+                        <li>Comprendre son humeur et se sentir accompagné</li>
+                        <li>Créer un espace personnel musical</li>
+                        <li>Découvrir, explorer, s'évader</li>
+                        <li>Vivre une expérience positive et personnalisée</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Section Inscription -->
+    <section class="signup-promo-section">
+        <div class="promo-container">
+            <div class="promo-text">
+                <h2>Inscris-toi en un clin d'œil et débloque l'accès complet à toute la bibliothèque !</h2>
+                <p>Feuillette, découvre, explore... et surtout enregistre tes musiques préférées pour les retrouver à tout moment.</p>
+            </div>
+            <div class="promo-image">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/character.png" alt="Personnage Vibesic">
+            </div>
+        </div>
+    </section>
+</div>
 <style>
 .vibesic-frontpage {
     min-height: calc(100vh - 200px);
@@ -112,7 +153,7 @@ z-index: 1;
 }
 
 .welcome-message strong {
-    color: #ff7f50;
+    color: #F6843F;
     font-weight: bold;
 }
 
@@ -127,7 +168,7 @@ z-index: 1;
 
 
 .main-title .highlight {
-    color: #ff7f50;
+    color: #F6843F;
 }
 
 .action-buttons {
@@ -152,24 +193,24 @@ z-index: 1;
 
 .btn-explore {
     background-color: transparent;
-    color: #ff7f50;
-    border: 2px solid #ff7f50;
+    color: #F6843F;
+    border: 2px solid #F6843F;
 }
 
 .btn-explore:hover {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
 }
 
 .btn-orange {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-    border: 2px solid #ff7f50;
+    border: 2px solid #F6843F;
 }
 
 .btn-orange:hover {
-    background-color: #ff6a3d;
-    border-color: #ff6a3d;
+    background-color: #F6843F;
+    border-color: #;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
 }

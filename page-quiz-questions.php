@@ -191,6 +191,7 @@ get_header();
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin-bottom: 50px;
+   
 }
 
 .option-card {
@@ -203,7 +204,7 @@ get_header();
 }
 
 .option-card.selected .option-image {
-    border-color: #ff7f50;
+    border-color: #F6843F;
     border-width: 4px;
     box-shadow: 0 6px 20px rgba(255, 127, 80, 0.4);
 }
@@ -216,6 +217,8 @@ get_header();
     border-radius: 20px;
     margin-bottom: 15px;
     transition: all 0.3s ease;
+     
+  
 }
 /* Images Question 1 - Environnements */
 #question1 .option-card:nth-child(1) .option-image {
@@ -223,6 +226,7 @@ get_header();
     background-size: cover;
     background-position: center;
      font-family:'MusticaPro', sans-serif;
+    
 
 }
 
@@ -363,13 +367,16 @@ get_header();
 }
 
 .btn-orange {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-    border: 2px solid #ff7f50;
+    border: 2px solid #F6843F;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
 }
 
 .btn-orange:hover:not(:disabled) {
-    background-color: #ff6a3d;
+    background-color: #F6843F;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
 }
@@ -381,12 +388,15 @@ get_header();
 
 .btn-outline {
     background-color: transparent;
-    color: #ff7f50;
-    border: 2px solid #ff7f50;
+    color: #F6843F;
+    border: 2px solid #F6843F;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
 }
 
 .btn-outline:hover {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
 }
 

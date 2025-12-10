@@ -128,6 +128,9 @@ get_header();
     justify-content: center;
     padding: 10px 40px;
     gap: 10px;
+    font-family: 'Coolvetica', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .btn-orange:hover {
