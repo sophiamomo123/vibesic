@@ -853,7 +853,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     '#5DADE2'   // Bleu pour tristesse
                 ],
                 borderWidth: 0
-              
             }]
         },
         options: {
