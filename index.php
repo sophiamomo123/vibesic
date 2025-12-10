@@ -42,6 +42,12 @@ get_header();
     <?php endif; ?>
 </div>
 
+<div> 
+    <p>
+        voici la suite de mon projet
+    </p>
+</div>
+
 <style>
 .vibesic-frontpage {
     min-height: calc(100vh - 200px);
