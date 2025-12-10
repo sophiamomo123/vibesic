@@ -273,7 +273,9 @@ get_header();
     background-color: transparent;
     color: #F6843F;
     border: 2px solid #F6843F;
-    padding: 10px 40px;
+    padding: 10px 45px;
+    gap: 10px;
+
 }
 
 .btn-explore:hover {
@@ -285,6 +287,8 @@ get_header();
     background-color: #F6843F;
     color: white;
     border: 2px solid #F6843F;
+    gap: 10px;
+    padding: 10px 45px;
 }
 
 .btn-orange:hover {

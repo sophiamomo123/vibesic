@@ -88,6 +88,8 @@ get_header();
     font-size: 16px;
     border: none;
     letter-spacing: 2px;
+    gap: 10px;
+    padding: 10px 40px;
 }
 .quiz-right {
     display: flex;
