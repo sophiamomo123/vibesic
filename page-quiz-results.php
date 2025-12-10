@@ -68,6 +68,7 @@ get_header();
                 </div>
             </div>
 
+            <div><p>bonjour</p></div>
             
             <!-- Musiques par instruments -->
             <div class="music-section">
