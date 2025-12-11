@@ -10,10 +10,16 @@ get_header();
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-content">
+            <button class="sidebar-toggle" aria-label="Ouvrir le menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
             <a href="<?= esc_url(home_url('/')); ?>" class="sidebar-logo">
-                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-vibesic.PNG" alt="Vibesic" class="logo-image">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-vibesic.PNG" alt="Vibesic" class="logo-image">
             </a>
-            
+
             <nav class="sidebar-nav">
                 <a href="<?= esc_url(home_url('/')); ?>" class="nav-item">
                     <span class="nav-icon">🏠</span>
@@ -34,11 +40,18 @@ get_header();
     <!-- Main Content -->
     <main class="results-main">
         <div class="results-container">
-            <h1 class="results-title">Vous êtes d'humeur : <span id="dominant-emotion"></span></h1>
-            <p class="results-subtitle">Voici l'analyse de vos réponses</p>
+            <div class="results-header">
+                <h1 class="results-title">Vous êtes d'humeur  <span id="dominant-emotion"></span></h1>
+                <!-- Playlist banner image placed to the right of the title -->
+                <div class="playlist-banner">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/playlist.png" alt="Playlist" class="playlist-image">
+                </div>
+            </div>
+            
 
             <!-- Graphique et Légende côte à côte -->
             <div class="chart-legend-container">
+                <div class="chart-inner">
                 <div class="chart-container">
                     <canvas id="emotionChart"></canvas>
                 </div>
@@ -61,27 +74,28 @@ get_header();
                         <span class="legend-value" id="joie-percent">0%</span>
                     </div>
                     <div class="legend-item">
-                        <span class="legend-color" style="background-color: #95A5A6;"></span>
+                        <span class="legend-color" style="background-color: #5DADE2;"></span>
                         <span class="legend-label">Tristesse</span>
                         <span class="legend-value" id="tristesse-percent">0%</span>
                     </div>
                 </div>
+                </div>
             </div>
 
-            <div><p>bonjour</p></div>
+            <!-- Conteneur pour égalité 50/50 : affichage de deux blocs côte-à-côte -->
+            <div id="tieResults" class="tie-results"></div>
+
+           
             
             <!-- Musiques par instruments -->
             <div class="music-section">
                 <h2 class="section-title">Explorez par instruments</h2>
                 
-                <!-- Filtre par instrument -->
+                <!-- Filtre par instrument (limité à 3) -->
                 <div class="instrument-filters">
-                    <button class="filter-btn active" onclick="filterByInstrument('all')">Tous</button>
-                    <button class="filter-btn" onclick="filterByInstrument('piano')">Piano</button>
-                    <button class="filter-btn" onclick="filterByInstrument('guitare')">Guitare</button>
-                    <button class="filter-btn" onclick="filterByInstrument('violon')">Violon</button>
-                    <button class="filter-btn" onclick="filterByInstrument('saxophone')">Saxophone</button>
-                    <button class="filter-btn" onclick="filterByInstrument('flute')">Flûte</button>
+                    <button class="filter-btn" onclick="filterByInstrument('piano', this)">Piano</button>
+                    <button class="filter-btn" onclick="filterByInstrument('guitare', this)">Guitare</button>
+                    <button class="filter-btn" onclick="filterByInstrument('violon', this)">Violon</button>
                 </div>
 
                 <!-- Liste des musiques -->
@@ -96,10 +110,17 @@ get_header();
 .results-page {
     display: flex;
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #ffffffff;
+    flex-direction: column;
 }
 
+.results-title {
+    font-family: 'Coolvetica', Arial, sans-serif;
+    letter-spacing: 6px;
+    text-align: center;
+}
 /* Sidebar */
+
 .sidebar {
     width: 250px;
     background-color: #ffffff;
@@ -108,7 +129,104 @@ get_header();
     height: 100vh;
     left: 0;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
+    transition: width 300ms cubic-bezier(.2,.9,.2,1);
+    overflow: visible;
+}
+
+/* Toggle button (burger) */
+.sidebar .sidebar-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    align-items: flex-start;
+    transition: transform 300ms ease;
+}
+
+.sidebar .sidebar-toggle .bar {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 3px;
+    transition: transform 250ms ease, width 200ms ease, height 200ms ease, opacity 200ms ease, background-color 200ms ease;
+    transform-origin: center;
+}
+
+/* Collapsed sidebar styles (fermé) */
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.sidebar.collapsed .sidebar-content {
+    padding: 20px 10px;
+}
+
+.sidebar.collapsed .sidebar-logo {
+    display: block;
+    text-align: center;
+}
+
+
+.sidebar.collapsed .sidebar-toggle {
+    /* when sidebar is collapsed, show bars as a vertical column */
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar.collapsed .sidebar-toggle .bar {
+    width: 4px;
+    height: 20px;
+    margin: 0 0 6px 0;
+}
+
+/* Default (expanded) burger: horizontal small bars stacked */
+.sidebar .sidebar-toggle {
+    flex-direction: column;
+}
+
+/* When the toggle has .open, animate into an X */
+.sidebar .sidebar-toggle.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.sidebar .sidebar-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.sidebar .sidebar-toggle.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* When not open ensure bars show as three stacked short horizontals */
+.sidebar .sidebar-toggle:not(.open) .bar:nth-child(1),
+.sidebar .sidebar-toggle:not(.open) .bar:nth-child(2),
+.sidebar .sidebar-toggle:not(.open) .bar:nth-child(3) {
+    transform: none;
+    opacity: 1;
+}
+.sidebar .sidebar-toggle.open .bar:nth-child(1) {
+    transform: translateY(6px) rotate(0deg);
+}
+.sidebar .sidebar-toggle.open .bar:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+}
+.sidebar .sidebar-toggle.open .bar:nth-child(3) {
+    transform: translateY(-6px) rotate(0deg);
+}
+
+.sidebar .sidebar-toggle:not(.open) .bar:nth-child(1) {
+    transform: rotate(90deg) translateY(-3px);
+}
+.sidebar .sidebar-toggle:not(.open) .bar:nth-child(2) {
+    opacity: 0.9;
+}
+.sidebar .sidebar-toggle:not(.open) .bar:nth-child(3) {
+    transform: rotate(90deg) translateY(3px);
 }
 
 .sidebar-content {
@@ -152,17 +270,17 @@ get_header();
 }
 
 .nav-item:hover {
-    background-color: #fff5f0;
+    background-color: #ffffffff;
     color: #ff7f50;
 }
 
 .nav-item.logout {
-    margin-top: auto;
+    /* placer la déconnexion juste sous la bibliothèque, sans marge automatique */
     color: #e74c3c;
 }
 
 .nav-item.logout:hover {
-    background-color: #ffe5e5;
+    background-color: #ffffffff;
 }
 
 .nav-icon {
@@ -173,7 +291,16 @@ get_header();
 .results-main {
     margin-left: 250px;
     flex: 1;
-    padding: 50px;
+    padding: 30px;
+    padding-bottom: 80px;
+    position: relative;
+    z-index: 1;
+    transition: margin-left 0.25s ease;
+}
+
+/* lorsque la sidebar est réduite, décaler le contenu */
+.sidebar.collapsed ~ .results-main {
+    margin-left: 60px;
 }
 
 .results-container {
@@ -182,7 +309,7 @@ get_header();
 }
 
 .results-title {
-    font-size: 42px;
+    font-size: 36px;
     font-weight: bold;
     color: #000;
     margin-bottom: 10px;
@@ -190,7 +317,6 @@ get_header();
 }
 
 .results-title #dominant-emotion {
-    color: #ff7f50;
     text-transform: capitalize;
 }
 
@@ -200,44 +326,103 @@ get_header();
     margin-bottom: 50px;
 }
 
+
 .chart-legend-container {
     display: flex;
-    gap: 40px;
+    gap: 24px;
     align-items: center;
-    background-color: white;
-    padding: 50px;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    margin-bottom: 40px;
+    /* inverser l'ordre : placer le graphique à droite */
+    flex-direction: row-reverse;
+    position: relative;
+    border-radius: 16px;
+    margin-bottom: 28px;
+    overflow: visible;
+}
+
+/* Playlist banner */
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px; /* slightly larger gap to balance bigger image */
+    margin-bottom: 8px;
+}
+
+.results-title { margin: 0; }
+
+/* Playlist banner */
+.playlist-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.playlist-image {
+    width: 240px; /* larger so it exceeds title height */
+    max-width: 48%;
+    height: auto;
+    display: inline-block;
+    align-self: flex-start; /* align to top so it can exceed the title vertically */
+    transform: translateY(-8px); /* slight upward overlap */
+}
+
+@media (max-width: 1024px) {
+    .results-header { gap: 26px; }
+    .playlist-image { width: 200px; max-width: 48%; transform: translateY(-6px); }
+}
+
+@media (max-width: 768px) {
+    .results-header { gap: 20px; }
+    .playlist-image { width: 160px; max-width: 56%; transform: translateY(-4px); }
+}
+
+@media (max-width: 480px) {
+    /* stack vertically on small screens */
+    .results-header { flex-direction: column; gap: 12px; }
+    .playlist-image { width: 140px; max-width: 70%; transform: translateY(0); align-self: center; }
+}
+
+
+
+.chart-inner {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
 }
 
 .chart-container {
-    flex: 0 0 400px;
+    flex: 0 0 300px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #emotionChart {
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 .legend {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 20px;
+    gap: 12px;
+    padding: 12px;
     background-color: #f8f9fa;
     border-radius: 10px;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 .legend-item:hover {
@@ -259,7 +444,7 @@ get_header();
 
 .legend-value {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     color: #ff7f50;
 }
 
@@ -290,6 +475,53 @@ get_header();
     border-bottom: 2px solid #f0f0f0;
 }
 
+.instrument-filters-small {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.instrument-filters-small .filter-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+}
+
+.tie-results {
+    margin: 20px 0 30px;
+}
+
+.tie-blocks {
+    display: flex;
+    gap: 20px;
+}
+
+.tie-block {
+    flex: 1;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.tie-block h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.instrument-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.instrument-list li {
+    padding: 8px 6px;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 600;
+}
+
+.instrument-list li:last-child { border-bottom: none; }
+
 .filter-btn {
     padding: 10px 25px;
     border-radius: 20px;
@@ -302,6 +534,67 @@ get_header();
     transition: all 0.3s ease;
     font-family: 'Coolvetica', Arial, sans-serif;
 }
+
+/* Music list card styles (stacked) */
+.instrument-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.instrument-list li {
+    padding: 0;
+    border: none;
+}
+
+.music-entry {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    background: linear-gradient(180deg, #ffffff, #fbfbfb);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.play-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff7f50, #ff6b6b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.play-circle svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+.song-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #111;
+}
+
+.song-artist {
+    font-size: 13px;
+    color: #666;
+}
+
+.music-link { text-decoration: none; }
 
 .filter-btn:hover {
     border-color: #ff7f50;
@@ -539,15 +832,15 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // Question 1 - Environnement
-    if (answers[1] === 'plage') emotions.dynamisme++;
+    if (answers[1] === 'ville') emotions.dynamisme++;
     else if (answers[1] === 'campagne') emotions.calme++;
-    else if (answers[1] === 'foret') emotions.joie++;
-    else if (answers[1] === 'ville') emotions.tristesse++;
+    else if (answers[1] === 'plage') emotions.joie++;
+    else if (answers[1] === 'foret') emotions.tristesse++;
     
     // Question 2 - Saison
     if (answers[2] === 'ete') emotions.dynamisme++;
-    else if (answers[2] === 'automne') emotions.calme++;
-    else if (answers[2] === 'hiver') emotions.tristesse++;
+    else if (answers[2] === 'hiver') emotions.calme++;
+    else if (answers[2] === 'automne') emotions.tristesse++;
     else if (answers[2] === 'printemps') emotions.joie++;
     
     // Question 3 - Activité
@@ -570,6 +863,20 @@ document.addEventListener('DOMContentLoaded', function() {
         joie: Math.round((emotions.joie / total) * 100),
         tristesse: Math.round((emotions.tristesse / total) * 100)
     };
+
+    // Helper: convert hex color to "r,g,b" string for rgba()
+    function hexToRgb(hex) {
+        if (!hex) return '0,0,0';
+        hex = hex.replace('#', '');
+        if (hex.length === 3) {
+            hex = hex.split('').map(h => h + h).join('');
+        }
+        const bigint = parseInt(hex, 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return `${r},${g},${b}`;
+    }
     
     // Afficher les pourcentages
     document.getElementById('dynamisme-percent').textContent = percentages.dynamisme + '%';
@@ -591,10 +898,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     emotions.tristesse
                 ],
                 backgroundColor: [
-                    '#FF6B6B',
-                    '#4ECDC4',
-                    '#FFE66D',
-                    '#95A5A6'
+                    '#FF6B6B', // dynamisme - rouge
+                    '#4ECDC4', // calme - vert
+                    '#FFE66D', // joie - jaune
+                    '#5DADE2'  // tristesse - bleu
                 ],
                 borderWidth: 0
             }]
@@ -618,20 +925,76 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Recommandation basée sur l'émotion dominante
-    const dominantEmotion = Object.keys(emotions).reduce((a, b) => 
-        emotions[a] > emotions[b] ? a : b
-    );
-    
-    // Afficher l'humeur dominante dans le titre
     const emotionNames = {
         dynamisme: 'Dynamique',
         calme: 'Calme',
         joie: 'Joyeux',
-        tristesse: 'Mélancolique'
+        tristesse: 'Triste'
     };
-    
-    document.getElementById('dominant-emotion').textContent = emotionNames[dominantEmotion];
-    
+
+    // Couleurs correspondantes (utilisées aussi dans le graphique)
+    const emotionColors = {
+        dynamisme: '#FF6B6B', // rouge
+        calme: '#4ECDC4',     // vert
+        joie: '#FFE66D',      // jaune
+        tristesse: '#5DADE2'  // bleu
+    };
+
+    // Image floue utilisée pour l'humeur 'calme'
+    const imgCalmeUrl = '<?php echo get_template_directory_uri(); ?>/assets/images/Humeur-blur.png';
+
+    // Déterminer l'émotion dominante ou le cas de partage 50/50 entre deux humeurs
+    const counts = emotions; // nombres bruts (0-4)
+    const maxCount = Math.max(...Object.values(counts));
+    const topKeys = Object.keys(counts).filter(k => counts[k] === maxCount);
+
+    // Préparer la variable qui servira pour la recommandation
+    let dominantEmotion = null;
+
+    // Si exactement deux émotions sont à 50% (2 sur 4) -> afficher les deux humeurs colorées
+    if (topKeys.length === 2 && maxCount === (total / 2)) {
+        // join the two mood names with a lowercase "et" (force lowercase to avoid CSS capitalize)
+        const html = topKeys.map(k => `<span style="color: ${emotionColors[k]};">${emotionNames[k]}</span>`).join('<span style="text-transform:lowercase"> et </span>');
+        document.getElementById('dominant-emotion').innerHTML = html;
+        // Choisir la première pour la recommandation (évite erreur JS) — on pourrait fusionner recommandations plus tard
+        dominantEmotion = topKeys[0];
+
+        // Appliquer un dégradé entre les deux couleurs sur la carte arrière
+        const container = document.querySelector('.chart-legend-container');
+        const imgUrl = '<?php echo get_template_directory_uri(); ?>/assets/images/Humeur-blur.png';
+        const c1 = emotionColors[topKeys[0]];
+        const c2 = emotionColors[topKeys[1]];
+        if (container) {
+            const parts = [`linear-gradient(90deg, rgba(${hexToRgb(c1)},0.35), rgba(${hexToRgb(c2)},0.35))`];
+            if (topKeys.includes('calme')) parts.push(`url(${imgUrl})`);
+            container.style.backgroundImage = parts.join(', ');
+            container.style.backgroundSize = 'cover';
+            container.style.backgroundPosition = 'center';
+            container.style.backgroundRepeat = 'no-repeat';
+        }
+
+        // Do not apply special styling around the title for 'calme' — keep title appearance normal
+    } else {
+        // sinon afficher la seule humeur dominante
+        dominantEmotion = Object.keys(emotions).reduce((a, b) => emotions[a] > emotions[b] ? a : b);
+        document.getElementById('dominant-emotion').innerHTML = `<span style="color: ${emotionColors[dominantEmotion]};">${emotionNames[dominantEmotion]}</span>`;
+
+        // Appliquer une teinte de la couleur dominante sur la carte arrière
+        const container = document.querySelector('.chart-legend-container');
+        const imgUrl = '<?php echo get_template_directory_uri(); ?>/assets/images/Humeur-blur.png';
+        const c = emotionColors[dominantEmotion];
+        if (container) {
+            const parts = [`linear-gradient(rgba(${hexToRgb(c)},0.35), rgba(${hexToRgb(c)},0.35))`];
+            if (dominantEmotion === 'calme') parts.push(`url(${imgUrl})`);
+            container.style.backgroundImage = parts.join(', ');
+            container.style.backgroundSize = 'cover';
+            container.style.backgroundPosition = 'center';
+            container.style.backgroundRepeat = 'no-repeat';
+        }
+
+        // Keep the title styling consistent for all moods (no special surround for 'calme')
+    }
+
     const recommendations = {
         dynamisme: "Nous vous recommandons une playlist énergique et rythmée pour booster votre dynamisme !",
         calme: "Nous vous recommandons une playlist apaisante et relaxante pour prolonger votre sérénité.",
@@ -639,10 +1002,70 @@ document.addEventListener('DOMContentLoaded', function() {
         tristesse: "Nous vous recommandons une playlist douce et contemplative pour accompagner votre introspection."
     };
     
-    document.getElementById('recommendation-text').textContent = recommendations[dominantEmotion];
+    // Mettre la recommandation (utilise la première humeur dominante si égalité)
+    if (document.getElementById('recommendation-text')) {
+        document.getElementById('recommendation-text').textContent = recommendations[dominantEmotion] || '';
+    }
     
-    // Générer la liste de musiques
-    generateMusicList();
+    // Si égalité 50/50, afficher deux blocs côte-à-côte avec titres musicaux par humeur
+    const tieContainer = document.getElementById('tieResults');
+    if (topKeys.length === 2 && maxCount === (total / 2)) {
+        if (tieContainer) {
+            const moodA = topKeys[0];
+            const moodB = topKeys[1];
+            tieContainer.innerHTML = `
+                <div class="tie-blocks">
+                    <div class="tie-block" data-mood="${moodA}">
+                        <h3>${emotionNames[moodA]}</h3>
+                        <div class="instrument-filters-small">
+                            <button class="filter-btn" onclick="filterTieByInstrument('${moodA}','piano', this)">Piano</button>
+                            <button class="filter-btn" onclick="filterTieByInstrument('${moodA}','guitare', this)">Guitare</button>
+                            <button class="filter-btn" onclick="filterTieByInstrument('${moodA}','violon', this)">Violon</button>
+                        </div>
+                        <div class="tie-music-list" id="tie-music-${moodA}"></div>
+                    </div>
+                    <div class="tie-block" data-mood="${moodB}">
+                        <h3>${emotionNames[moodB]}</h3>
+                        <div class="instrument-filters-small">
+                            <button class="filter-btn" onclick="filterTieByInstrument('${moodB}','piano', this)">Piano</button>
+                            <button class="filter-btn" onclick="filterTieByInstrument('${moodB}','guitare', this)">Guitare</button>
+                            <button class="filter-btn" onclick="filterTieByInstrument('${moodB}','violon', this)">Violon</button>
+                        </div>
+                        <div class="tie-music-list" id="tie-music-${moodB}"></div>
+                    </div>
+                </div>
+            `;
+            // When there is a 50/50 tie, hide the global "Explorez par instruments" section
+            const musicSection = document.querySelector('.music-section');
+            if (musicSection) musicSection.style.display = 'none';
+
+            // Populate each tie block with the full list for that mood (stacked, clickable)
+            setTimeout(() => {
+                const listA = document.getElementById(`tie-music-${moodA}`);
+                const listB = document.getElementById(`tie-music-${moodB}`);
+                if (listA) renderSongsList(listA, musicDatabase.filter(m => m.mood === moodA));
+                if (listB) renderSongsList(listB, musicDatabase.filter(m => m.mood === moodB));
+            }, 50);
+        }
+    } else {
+        if (tieContainer) tieContainer.innerHTML = '';
+        // Ensure global instrument explorer is visible for single-mood results
+        const musicSection = document.querySelector('.music-section');
+        if (musicSection) musicSection.style.display = '';
+
+        // For a single dominant mood, pre-populate the music list with titles for that mood (stacked clickable)
+        const musicListEl = document.getElementById('musicList');
+        if (musicListEl) {
+            const songsForMood = musicDatabase.filter(m => m.mood === dominantEmotion);
+            if (songsForMood.length) {
+                renderSongsList(musicListEl, songsForMood);
+            } else {
+                musicListEl.innerHTML = '<div class="instrument-list"><p>Aucun titre trouvé pour cette humeur.</p></div>';
+            }
+            // Reset instrument button active state
+            document.querySelectorAll('.music-section .filter-btn').forEach(b => b.classList.remove('active'));
+        }
+    }
 });
 
 // Base de données de musiques avec instruments
@@ -673,55 +1096,113 @@ const musicDatabase = [
     { title: "The Lonely Shepherd", artist: "James Last", instrument: "flute", emoji: "🎶", mood: "tristesse" }
 ];
 
-let currentFilter = 'all';
+let currentFilter = null;
 
 function generateMusicList() {
-    const musicList = document.getElementById('musicList');
-    musicList.innerHTML = '';
-    
-    musicDatabase.forEach((music, index) => {
-        const musicCard = document.createElement('div');
-        musicCard.className = 'music-card';
-        musicCard.dataset.instrument = music.instrument;
-        musicCard.dataset.mood = music.mood;
-        
-        musicCard.innerHTML = `
-            <div class="music-cover">${music.emoji}</div>
-            <div class="music-info">
-                <div class="music-title">${music.title}</div>
-                <div class="music-artist">${music.artist}</div>
-                <div class="music-tags">
-                    <span class="music-tag">${music.instrument}</span>
-                </div>
-            </div>
-        `;
-        
-        musicCard.onclick = () => playMusic(music);
-        musicList.appendChild(musicCard);
-    });
+    // kept for legacy, but we don't auto-render full cards now
 }
 
-function filterByInstrument(instrument) {
+function filterByInstrument(instrument, btn) {
     currentFilter = instrument;
-    
+
     // Mettre à jour les boutons actifs
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    // Filtrer les cartes
-    document.querySelectorAll('.music-card').forEach(card => {
-        if (instrument === 'all' || card.dataset.instrument === instrument) {
-            card.classList.remove('hidden');
-        } else {
-            card.classList.add('hidden');
-        }
-    });
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    // Render a simple list of titles for the selected instrument
+    const musicList = document.getElementById('musicList');
+    musicList.innerHTML = '';
+    const songs = musicDatabase.filter(m => m.instrument === instrument);
+    const container = document.createElement('div');
+    container.className = 'instrument-list';
+    musicList.appendChild(container);
+    // use renderSongsList to create stacked clickable cards
+    renderSongsList(container, songs);
+}
+
+// Filter and render titles for a specific mood (used in tie blocks)
+function filterTieByInstrument(mood, instrument, btn) {
+    // update active state for the small button group
+    const parent = btn.closest('.tie-block');
+    if (!parent) return;
+    parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const target = document.getElementById(`tie-music-${mood}`);
+    if (!target) return;
+    target.innerHTML = '';
+    const songs = musicDatabase.filter(m => m.mood === mood && m.instrument === instrument);
+    // use the same card renderer for tie blocks
+    renderSongsList(target, songs);
 }
 
 function playMusic(music) {
-    alert(`Lecture de : ${music.title} par ${music.artist}\n(Fonction de lecture à implémenter)`);
+    // Si la musique contient une URL, jouer via un élément <audio>, sinon afficher une alerte (placeholder)
+    if (music.url) {
+        let player = document.getElementById('vibesic-audio-player');
+        if (!player) {
+            player = document.createElement('audio');
+            player.id = 'vibesic-audio-player';
+            player.controls = true;
+            player.style.position = 'fixed';
+            player.style.left = '20px';
+            player.style.bottom = '20px';
+            player.style.zIndex = 9999;
+            document.body.appendChild(player);
+        }
+        player.src = music.url;
+        player.play().catch(err => {
+            console.warn('Erreur lecture audio:', err);
+            alert(`Lecture de : ${music.title} — ${music.artist} (erreur de lecture)`);
+        });
+    } else {
+        alert(`Lecture de : ${music.title} — ${music.artist}\n(Aucun fichier audio disponible)`);
+    }
+}
+
+// Helper: render an array of song objects into a target container (stacked list, clickable)
+function renderSongsList(targetEl, songs) {
+    if (!targetEl) return;
+    targetEl.innerHTML = '';
+    if (!songs || songs.length === 0) {
+        targetEl.textContent = 'Aucun titre trouvé.';
+        return;
+    }
+    const ul = document.createElement('ul');
+    songs.forEach(s => {
+        const li = document.createElement('li');
+
+        const entry = document.createElement('div');
+        entry.className = 'music-entry';
+
+        const play = document.createElement('div');
+        play.className = 'play-circle';
+        play.setAttribute('role', 'button');
+        play.setAttribute('aria-label', `Lire ${s.title}`);
+        // SVG triangle
+        play.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>`;
+        play.addEventListener('click', (e) => { e.stopPropagation(); playMusic(s); });
+
+        const meta = document.createElement('div');
+        meta.className = 'song-meta';
+        const title = document.createElement('div');
+        title.className = 'song-title';
+        title.textContent = s.title;
+        const artist = document.createElement('div');
+        artist.className = 'song-artist';
+        artist.textContent = s.artist;
+        meta.appendChild(title);
+        meta.appendChild(artist);
+
+        // clicking the card also plays
+        entry.addEventListener('click', () => playMusic(s));
+
+        entry.appendChild(play);
+        entry.appendChild(meta);
+        li.appendChild(entry);
+        ul.appendChild(li);
+    });
+    targetEl.appendChild(ul);
 }
 
 function restartQuiz() {
@@ -733,6 +1214,28 @@ function goToPlaylist() {
     // Redirection vers la bibliothèque ou page de playlist
     window.location.href = '<?php echo home_url('/bibliotheque'); ?>';
 }
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (!toggle || !sidebar) return;
+
+    // Set initial visual state of the burger based on sidebar
+    toggle.classList.toggle('open', !sidebar.classList.contains('collapsed'));
+    toggle.setAttribute('aria-label', sidebar.classList.contains('collapsed') ? 'Ouvrir le menu' : 'Fermer le menu');
+
+    toggle.addEventListener('click', function() {
+        const wasCollapsed = sidebar.classList.contains('collapsed');
+        sidebar.classList.toggle('collapsed');
+        // Toggle visual state on the button (open = sidebar expanded)
+        toggle.classList.toggle('open', wasCollapsed);
+        // change aria-label for accessibility
+        const expanded = !sidebar.classList.contains('collapsed');
+        toggle.setAttribute('aria-label', expanded ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+});
 </script>
 
 <?php

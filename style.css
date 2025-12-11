@@ -7,3 +7,23 @@ License: GNU General Public License v2 or later
 
 */
 
+/* Fond pour la page d'accueil */
+body.home,
+body.page-template-front-page {
+    background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Conteneurs avec fond transparent et flou */
+.home .site-content,
+.home .main-content,
+.home .content-area {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    
+}

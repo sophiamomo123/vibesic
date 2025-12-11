@@ -30,7 +30,7 @@ if (isset($_POST['signup_submit'])) {
         if (!is_wp_error($user_id)) {
             wp_set_current_user($user_id);
             wp_set_auth_cookie($user_id);
-            wp_redirect(home_url('/quiz')); // ✅ Redirection vers le quiz
+            wp_redirect(home_url('/quiz'));
             exit;
         } else {
             $errors[] = 'Erreur lors de la création du compte.';
@@ -51,9 +51,9 @@ get_header();
                 </div>
                 
                 <h1 class="main-title">
-                    <span class="highlight">Découvrez</span> la musique<br>
-                    instrumentale par votre<br>
-                    humeur du jour
+                    <span class="highlight">Découvrez</span> <br>la musique
+                    instrumentale par <br>
+                    votre humeur du jour
                 </h1>
                 
                 <div class="action-buttons">
@@ -67,8 +67,8 @@ get_header();
         <main class="vibesic-main">
             <div id="homeView">
                 <h1 class="main-title">
-                    <span class="highlight">Découvrez</span><br>
-                    la musique instrumentale par<br>
+                    <span class="highlight">Découvrez</span><br>la musique
+                     instrumentale par<br>
                     votre humeur du jour
                 </h1>
                 
@@ -142,7 +142,59 @@ get_header();
     <?php endif; ?>
 </div>
 
+<!-- Section Nos Objectifs -->
+<section class="objectifs-section">
+    <div class="objectifs-container">
+        <h2 class="objectifs-title">Nos objectifs ?</h2>
+        
+        <div class="objectifs-cards">
+            <!-- Carte Fonctionnels -->
+            <div class="objectif-card">
+                <h3 class="card-title">Fonctionnels</h3>
+                <ul class="card-list">
+                    <li>Proposer une expérience musicale personnalisée</li>
+                    <li>Simplifier la découverte musicale</li>
+                    <li>Rendre l'expérience fun et intuitive</li>
+                    <li>Encourager un usage quotidien</li>
+                </ul>
+            </div>
+            
+            <!-- Carte Utilisateurs -->
+            <div class="objectif-card">
+                <h3 class="card-title">Utilisateurs</h3>
+                <ul class="card-list">
+                    <li>Comprendre son humeur et se sentir accompagné</li>
+                    <li>Créer un espace personnel musical</li>
+                    <li>Découvrir, explorer, s'évader</li>
+                    <li>Vivre une expérience positive et personnalisée</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Section inscription -->
+        <div class="inscription-cta">
+            <div class="cta-text">
+                <h3>Inscris-toi en un clin d'œil et débloque l'accès complet à toute la bibliothèque !</h3>
+                <p>Feuillette, découvre, explore... et surtout enregistre tes musiques préférées pour les retrouver à tout moment.</p>
+            </div>
+            <div class="cta-illustration">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/bonhomme.png" alt="Inscription">
+            </div>
+        </div>
+    </div>
+</section>
+
 <style>
+/* Fond pour la page d'accueil */
+body.home,
+body.front-page {
+    background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .vibesic-frontpage {
     min-height: calc(100vh - 200px);
     display: flex;
@@ -150,7 +202,7 @@ get_header();
     justify-content: center;
     align-items: center;
     padding: 50px 20px;
-    background-color: #ffffff;
+    background-color: transparent;
 }
 
 .vibesic-main {
@@ -174,7 +226,7 @@ get_header();
 }
 
 .main-title {
-    font-size: 48px;
+    font-size: 50px;
     line-height: 1.3;
     margin-bottom: 40px;
     font-weight: bold;
@@ -183,15 +235,12 @@ get_header();
     font-weight: 400;
     font-style: normal;
     letter-spacing: 3px;
-     }     
+}     
     
 .highlight {
+    font-size: 78px;
     color: #ff7f50;
-   
-}
-.main-title .highlight {
-    color: #ff7f50;
-    letter-spacing : 2px;
+    letter-spacing: 2px;
 }
 
 .action-buttons {
@@ -270,10 +319,10 @@ get_header();
 }
 
 .form-container {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 50px;
     border-radius: 15px;
-    
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     width: 100%;
 }
 
@@ -334,10 +383,129 @@ get_header();
     text-decoration: underline;
 }
 
+/* Section Nos Objectifs */
+.objectifs-section {
+    padding: 40px 60px 80px;
+    background-color: transparent;
+}
+
+.objectifs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.objectifs-title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 60px;
+    font-family: 'Coolvetica', Arial, sans-serif;
+    color: #000;
+}
+
+.objectifs-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.objectif-card {
+    background: white;
+    border: 4px solid #F6843F;
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 8px 8px 0px rgba(246, 132, 63, 0.3);
+}
+
+.card-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    font-family: 'Arial', sans-serif;
+    color: #000;
+    text-decoration: underline;
+}
+
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-list li {
+    padding-left: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    position: relative;
+}
+
+.card-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #F6843F;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Section CTA Inscription */
+.inscription-cta {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-top: 60px;
+}
+
+.cta-text {
+    flex: 1;
+}
+
+.cta-text h3 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    color: #000;
+}
+
+.cta-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+}
+
+.cta-illustration {
+    flex: 0 0 300px;
+     margin-top: 60px;
+}
+
+.cta-illustration img {
+    width: 100%;
+    height: auto;
+}
+
 /* Responsive */
+@media (max-width: 1024px) {
+    .objectifs-cards {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .inscription-cta {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
 @media (max-width: 768px) {
     .main-title {
         font-size: 32px;
+    }
+    
+    .highlight {
+        font-size: 48px;
     }
     
     .action-buttons {
@@ -353,6 +521,22 @@ get_header();
     .form-container {
         padding: 30px 20px;
     }
+    
+    .objectifs-section {
+        padding: 40px 20px;
+    }
+    
+    .objectifs-title {
+        font-size: 36px;
+    }
+    
+    .objectif-card {
+        padding: 30px;
+    }
+    
+    .cta-text h3 {
+        font-size: 24px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -363,6 +547,12 @@ get_header();
     .vibesic-frontpage {
         padding: 30px 15px;
     }
+}
+
+/* Hide home blocks when forms are visible */
+#signupForm[style*="display: block"] ~ #homeView .home-blocks,
+#loginForm[style*="display: block"] ~ #homeView .home-blocks {
+    display: none !important;
 }
 </style>
 

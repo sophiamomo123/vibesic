@@ -268,3 +268,24 @@ if (get_option('quiz_results_created') != 'yes') {
     force_create_quiz_results();
     update_option('quiz_results_created', 'yes');
 }
+
+
+
+// Fond pour la page de connexion et inscription WordPress
+function custom_login_background() {
+    ?>
+    <style>
+        body.login {
+            background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+    <?php
+}
+add_action('login_enqueue_scripts', 'custom_login_background');
+
+
+

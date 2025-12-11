@@ -26,7 +26,7 @@ get_header();
                 </button>
             </div>
             <div class="quiz-right">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/intro.png" alt="Avatars des émotions" class="avatars-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Introquiz.png" alt="Avatars des émotions" class="avatars-image">
 </div>
             </div>
         </div>

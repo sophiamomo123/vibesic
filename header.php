@@ -189,8 +189,8 @@
                 </span>
                 <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="header-btn btn-orange">SE DÉCONNECTER</a>
             <?php else : ?>
-                <a href="#" onclick="showSignup(); return false;" class="header-btn btn-orange">S'INSCRIRE</a>
-                <a href="#" onclick="showLogin(); return false;" class="header-btn btn-orange">SE CONNECTER</a>
+                <a href="<?= esc_url(home_url('/template-register')); ?>" class="header-btn btn-orange">S'INSCRIRE</a>
+                <a href="<?= esc_url(home_url('/template-login')); ?>" class="header-btn btn-orange">SE CONNECTER</a>
             <?php endif; ?>
         </nav>
     </header>
