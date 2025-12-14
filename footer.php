@@ -30,7 +30,7 @@
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Linkedin.png" alt="LinkedIn">
     </a>
     <a href="#" class="social-icon">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/facebook.png" alt="Facebook">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Facebook.png" alt="Facebook">
     </a>
     <a href="#" class="social-icon">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Instagram.png" alt="Instagram">
@@ -51,7 +51,6 @@
 
 
 <style>
-  /* Footer */
 .vibesic-footer {
     position: relative;
     z-index: 200; /* placer le footer au-dessus des éléments fixes comme la sidebar */
@@ -140,12 +139,12 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: brightness(0); /* Rend les icônes noires */
+   
 }
 
 .social-icon:hover {
     transform: translateY(-3px);
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .copyright {

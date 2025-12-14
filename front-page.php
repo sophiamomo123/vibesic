@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Template Name: Front Page
@@ -51,7 +52,7 @@ get_header();
                 </div>
                 
                 <h1 class="main-title">
-                    <span class="highlight">Découvrez</span> <br>la musique
+                    <span class="highlight">Découvrez</span> <br>La musique
                     instrumentale par <br>
                     votre humeur du jour
                 </h1>
@@ -66,11 +67,21 @@ get_header();
         <!-- Version non connectée -->
         <main class="vibesic-main">
             <div id="homeView">
-                <h1 class="main-title">
-                    <span class="highlight">Découvrez</span><br>la musique
+                <h1 class="main-title fadein-title">
+                    <span class="highlight">Découvrez</span><br>La musique
                      instrumentale par<br>
                     votre humeur du jour
                 </h1>
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var title = document.querySelector('.fadein-title');
+                    if(title) {
+                        setTimeout(function() {
+                            title.classList.add('fadein-visible');
+                        }, 200);
+                    }
+                });
+                </script>
                 
                 <div class="action-buttons">
                     <a href="<?php echo home_url('/quiz'); ?>" class="btn btn-explore">EXPLORER</a>
@@ -78,7 +89,7 @@ get_header();
             </div>
             
             <!-- Formulaire d'inscription (caché par défaut) -->
-            <div id="signupForm" class="auth-form" style="display: none;">
+            <div id="signupForm" class="auth-form fadein-block" style="display: none;">
                 <div class="form-container">
                     <h2 class="form-title">Créer un compte</h2>
                     
@@ -117,7 +128,7 @@ get_header();
             </div>
             
             <!-- Formulaire de connexion (caché par défaut) -->
-            <div id="loginForm" class="auth-form" style="display: none;">
+            <div id="loginForm" class="auth-form fadein-block" style="display: none;">
                 <div class="form-container">
                     <h2 class="form-title">Connectez-vous</h2>
                     <form method="post" action="<?= esc_url(wp_login_url()); ?>">
@@ -130,7 +141,7 @@ get_header();
                             <input type="password" name="pwd" id="pwd" required>
                         </div>
                         <input type="hidden" name="redirect_to" value="<?= esc_url(home_url('/quiz')); ?>">
-                        <button type="submit" class="btn btn-orange submit-btn">SE CONNECTER</button>
+                        <button type="submit" class="btn btn-orange submit-btn">CONNEXION</button>
                         <div class="form-footer">
                             Vous n'avez pas de compte ? 
                             <a href="#" onclick="showSignup(); return false;">inscrivez-vous</a>
@@ -148,37 +159,36 @@ get_header();
         <h2 class="objectifs-title">Nos objectifs ?</h2>
         
         <div class="objectifs-cards">
-            <!-- Carte Fonctionnels -->
-            <div class="objectif-card">
-                <h3 class="card-title">Fonctionnels</h3>
-                <ul class="card-list">
-                    <li>Proposer une expérience musicale personnalisée</li>
-                    <li>Simplifier la découverte musicale</li>
-                    <li>Rendre l'expérience fun et intuitive</li>
-                    <li>Encourager un usage quotidien</li>
-                </ul>
-            </div>
-            
-            <!-- Carte Utilisateurs -->
-            <div class="objectif-card">
-                <h3 class="card-title">Utilisateurs</h3>
-                <ul class="card-list">
-                    <li>Comprendre son humeur et se sentir accompagné</li>
-                    <li>Créer un espace personnel musical</li>
-                    <li>Découvrir, explorer, s'évader</li>
-                    <li>Vivre une expérience positive et personnalisée</li>
-                </ul>
-            </div>
+                <!-- Carte Fonctionnels -->
+                <div class="objectif-card fadein-block" id="fonctionnels-card">
+                    <h3 class="card-title">Fonctionnels</h3>
+                    <ul class="card-list">
+                        <li>Proposer une expérience musicale personnalisée</li>
+                        <li>Simplifier la découverte musicale</li>
+                        <li>Rendre l'expérience fun et intuitive</li>
+                        <li>Encourager un usage quotidien</li>
+                    </ul>
+                </div>
+                <!-- Carte Utilisateurs -->
+                <div class="objectif-card fadein-block" id="utilisateurs-card">
+                    <h3 class="card-title">Utilisateurs</h3>
+                    <ul class="card-list">
+                        <li>Comprendre son humeur et se sentir accompagné</li>
+                        <li>Créer un espace personnel musical</li>
+                        <li>Découvrir, explorer, s'évader</li>
+                        <li>Vivre une expérience positive et personnalisée</li>
+                    </ul>
+                </div>
         </div>
         
         <!-- Section inscription -->
         <div class="inscription-cta">
-            <div class="cta-text">
+            <div class="cta-text fadein-block">
                 <h3>Inscris-toi en un clin d'œil et débloque l'accès complet à toute la bibliothèque !</h3>
-                <p>Feuillette, découvre, explore... et surtout enregistre tes musiques préférées pour les retrouver à tout moment.</p>
+                <p>FEUILLETTE, DÉCOUVRE, EXPLORE ... <br> et surtout enregistre tes musiques préférées pour les retrouver à tout moment.</p>
             </div>
             <div class="cta-illustration">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/bonhomme.png" alt="Inscription">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Inscription.png" alt="Inscription">
             </div>
         </div>
     </div>
@@ -188,11 +198,14 @@ get_header();
 /* Fond pour la page d'accueil */
 body.home,
 body.front-page {
-    background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
+    background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/Flou.png');
     background-size: cover;
-    background-position: center;
     background-repeat: no-repeat;
+    background-position: center;
     background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 1);
+
+
 }
 
 .vibesic-frontpage {
@@ -234,13 +247,17 @@ body.front-page {
     font-family: 'coolvetica', sans-serif;
     font-weight: 400;
     font-style: normal;
-    letter-spacing: 3px;
+    letter-spacing: 8px;
+    line-height: 1.2;
 }     
+
     
 .highlight {
-    font-size: 78px;
-    color: #ff7f50;
-    letter-spacing: 2px;
+    font-size: 100px;
+    color: #F6843F;
+    letter-spacing: 5px;
+    line-height: 1.8;
+    
 }
 
 .action-buttons {
@@ -261,40 +278,52 @@ body.front-page {
     display: inline-block;
     cursor: pointer;
     border: 2px solid transparent;
+    padding: 9px 45px;
+    gap: 10px;
 }
 
 .btn-explore {
     background-color: transparent;
-    color: #ff7f50;
-    border: 2px solid #ff7f50;
+    color: #F6843F;
+    border: 2px solid #F6843F;
+    gap: 10px;
+    padding: 9px 45px;
+    font-size: 20px;
+    border-radius: 100px;
 }
 
 .btn-explore:hover {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
+    padding: 12px 45px;
+    gap: 10px;
 }
 
 .btn-orange {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-    border: 2px solid #ff7f50;
+    gap: 7px;
+    padding: 9px 45px;
+    border: 2px solid #F6843F;
 }
 
 .btn-orange:hover {
-    background-color: #ff6a3d;
-    border-color: #ff6a3d;
+    background-color: #F6843F;
+    border-color: #F6843F;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
+    gap: 9px;
+    padding: 12px 45px;
 }
 
 .btn-outline {
     background-color: transparent;
-    color: #ff7f50;
-    border: 2px solid #ff7f50;
+    color: #F6843F;
+    border: 2px solid #F6843F;
 }
 
 .btn-outline:hover {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
 }
 
@@ -307,9 +336,9 @@ body.front-page {
 }
 
 .alert-message.error {
-    background-color: #ffe5e5;
+    background-color: #ffffffff;
     color: #d32f2f;
-    border: 2px solid #ffcdd2;
+    border: 2px solid #ffffffff;
 }
 
 .auth-form {
@@ -324,10 +353,16 @@ body.front-page {
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     width: 100%;
+     box-shadow: 0 0 0 4px #C84545, 0 0 0 8px #84B82A, 0 0 0 12px #FCE977, 0 0 0 16px #26A9D8;
+    border-radius: 18px;
+    background: #fff;
+    position: relative;
+    z-index: 2;
 }
 
+
 .form-title {
-    color: #ff7f50;
+    color: #F6843F;
     font-size: 28px;
     margin-bottom: 30px;
     text-align: center;
@@ -358,7 +393,7 @@ body.front-page {
 }
 
 .form-group input:focus {
-    border-color: #ff7f50;
+    border-color: #F6843F;
 }
 
 .submit-btn {
@@ -374,7 +409,7 @@ body.front-page {
 }
 
 .form-footer a {
-    color: #ff7f50;
+    color: #F6843F;
     text-decoration: none;
     font-weight: bold;
 }
@@ -395,41 +430,48 @@ body.front-page {
 }
 
 .objectifs-title {
-    font-size: 48px;
-    font-weight: bold;
+    font-size: 39px;
+    letter-spacing: 6px;
     margin-bottom: 60px;
-    font-family: 'Coolvetica', Arial, sans-serif;
+    font-family: 'Coolvetica', sans-serif;
     color: #000;
+    text-align: center;
 }
 
 .objectifs-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    margin-bottom: 80px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-bottom: 80px;
+        align-items: stretch;
 }
+
+
 
 .objectif-card {
     background: white;
-    border: 4px solid #F6843F;
+    border: 2px solid #F6843F;
     border-radius: 25px;
     padding: 40px;
-    box-shadow: 8px 8px 0px rgba(246, 132, 63, 0.3);
+    box-shadow: 8px 8px 0px rgba(246, 133, 63, 0.22);
 }
 
 .card-title {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 25px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Coolvetica', sans-serif;
     color: #000;
-    text-decoration: underline;
+    text-align: center;
+    letter-spacing: 4px;
+    color: #F6843F
 }
 
 .card-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    line-height: 1.1;
 }
 
 .card-list li {
@@ -445,7 +487,7 @@ body.front-page {
     content: "•";
     position: absolute;
     left: 0;
-    color: #F6843F;
+    color: #000000ff;
     font-weight: bold;
     font-size: 20px;
 }
@@ -456,29 +498,37 @@ body.front-page {
     align-items: center;
     gap: 60px;
     margin-top: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 60px;
+
 }
 
 .cta-text {
     flex: 1;
+    line-height: 2.5;
 }
 
 .cta-text h3 {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
-    line-height: 1.4;
+    line-height: 1.2;
     color: #000;
+    font-family: 'Coolvetica', sans-serif;
+    letter-spacing: 4px;
 }
 
 .cta-text p {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #333;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #000;
 }
 
 .cta-illustration {
     flex: 0 0 300px;
      margin-top: 60px;
+     width: 370px;
 }
 
 .cta-illustration img {
@@ -486,8 +536,15 @@ body.front-page {
     height: auto;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+
+@media screen and (max-width: 1200px) {
+    .cta-illustration {
+        display: none;
+    }
+}
+
+
+@media screen and  (max-width: 1200px) {
     .objectifs-cards {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -500,31 +557,18 @@ body.front-page {
 }
 
 @media (max-width: 768px) {
-    .main-title {
-        font-size: 32px;
-    }
-    
-    .highlight {
-        font-size: 48px;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
+    .main-title {font-size: 32px;}
+    .highlight {font-size: 48px;}
+    .action-buttons { flex-direction: column;
         align-items: center;
     }
     
-    .btn {
-        width: 100%;
-        max-width: 300px;
-    }
+    .btn {width: 100%;
+        max-width: 300px;}
     
-    .form-container {
-        padding: 30px 20px;
-    }
+    .form-container {padding: 30px 20px;}
     
-    .objectifs-section {
-        padding: 40px 20px;
-    }
+    .objectifs-section {padding: 40px 20px;}
     
     .objectifs-title {
         font-size: 36px;
@@ -549,12 +593,14 @@ body.front-page {
     }
 }
 
-/* Hide home blocks when forms are visible */
 #signupForm[style*="display: block"] ~ #homeView .home-blocks,
 #loginForm[style*="display: block"] ~ #homeView .home-blocks {
     display: none !important;
 }
 </style>
+
+
+
 
 <script>
 function showSignup() {
@@ -578,13 +624,15 @@ function backToHome() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Si le formulaire a été soumis avec des erreurs, afficher le formulaire d'inscription
+
 <?php if (isset($_POST['signup_submit']) && isset($errors) && !empty($errors)) : ?>
     document.addEventListener('DOMContentLoaded', function() {
         showSignup();
     });
+
 <?php endif; ?>
 </script>
+
 
 <?php
 get_footer();

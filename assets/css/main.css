@@ -1,3 +1,66 @@
+/* Objectifs cards côte à côte et fade-in */
+.objectifs-cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 2rem auto 0 auto;
+    flex-wrap: wrap;
+    max-width: 800px;
+}
+.objectif-card {
+    flex: 1 1 300px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 2rem 1.5rem;
+    min-width: 220px;
+    max-width: 350px;
+    margin: 0 10px;
+    opacity: 1;
+    transition: box-shadow 0.3s;
+}
+.objectif-card:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+}
+.fadein-block {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(.4,0,.2,1), transform 1.2s cubic-bezier(.4,0,.2,1);
+}
+.fadein-block.fadein-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Fade-in pour le titre principal de la home */
+.fadein-title {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s cubic-bezier(.4,0,.2,1), transform 1.2s cubic-bezier(.4,0,.2,1);
+}
+.fadein-title.fadein-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Boutons uniformes sur tout le site */
+.vibesic-btn, button, .submit-btn, .btn, .logout-btn, .login-btn, .register-btn {
+    min-width: 180px;
+    max-width: 220px;
+    width: 200px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Pour les boutons dans les formulaires qui étaient en width: 100% */
+.form-container .submit-btn {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+}
 * {
     margin: 0;
     padding: 0;

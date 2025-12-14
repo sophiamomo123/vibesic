@@ -276,7 +276,7 @@ function custom_login_background() {
     ?>
     <style>
         body.login {
-            background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
+                    background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/Flou.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

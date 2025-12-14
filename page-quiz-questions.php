@@ -15,7 +15,7 @@ get_header();
 </head>
 <div class="quiz-questions-page">
     <main class="quiz-main">
-        <!-- Question 1 -->
+
         <div id="question1" class="question-container active">
             <h1 class="question-title">Quel type d'environnement vous attire le plus ?</h1>
             <div class="question-counter">1 / 4</div>
@@ -45,11 +45,11 @@ get_header();
             </div>
         </div>
 
-        <!-- Question 2 -->
+       
         <div id="question2" class="question-container">
             <h1 class="question-title">Quelle saison préférez-vous particulièrement ?</h1>
             <div class="question-counter">2 / 4</div>
-            
+
             <div class="options-grid">
                 <div class="option-card" onclick="selectOption(2, 'ete')">
                     <div class="option-image"></div>
@@ -75,7 +75,7 @@ get_header();
             </div>
         </div>
 
-        <!-- Question 3 -->
+        
         <div id="question3" class="question-container">
             <h1 class="question-title">Quelle activité vous ferait du bien en ce moment ?</h1>
             <div class="question-counter">3 / 4</div>
@@ -105,7 +105,7 @@ get_header();
             </div>
         </div>
 
-        <!-- Question 4 -->
+        
         <div id="question4" class="question-container">
             <h1 class="question-title">Quelle métaphore pourrait représenter votre état actuel ?</h1>
             <div class="question-counter">4 / 4</div>
@@ -136,6 +136,7 @@ get_header();
         </div>
     </main>
 </div>
+
 
 <style>
 .quiz-questions-page {
@@ -180,8 +181,8 @@ get_header();
 
 .question-counter {
     text-align: right;
-    font-size: 18px;
-    color: #666;
+    font-size: 15px;
+    color: #000;
     margin-bottom: 40px;
     font-weight: bold;
 }
@@ -191,6 +192,7 @@ get_header();
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin-bottom: 50px;
+
 }
 
 .option-card {
@@ -199,25 +201,24 @@ get_header();
 }
 
 .option-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
 }
 
 .option-card.selected .option-image {
-    border-color: #ff7f50;
     border-width: 4px;
-    box-shadow: 0 6px 20px rgba(255, 127, 80, 0.4);
+    box-shadow: 0 6px 20px rgba(255, 127, 80, 0.78);
 }
 
 .option-image {
     width: 100%;
     aspect-ratio: 4/3;
     background-color: white;
-    border: 2px solid #ddd;
     border-radius: 20px;
     margin-bottom: 15px;
     transition: all 0.3s ease;
 }
-/* Images Question 1 - Environnements */
+
+
 #question1 .option-card:nth-child(1) .option-image {
     background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/ville.png');
     background-size: cover;
@@ -247,7 +248,7 @@ get_header();
      font-family:'MusticaPro', sans-serif;
 }
 
-/* Images Question 2 - Saisons */
+
 #question2 .option-card:nth-child(1) .option-image {
     background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/ete.jpg');
     background-size: cover;
@@ -276,7 +277,7 @@ get_header();
      font-family:'MusticaPro', sans-serif;
 }
 
-/* Images Question 3 - Activités */
+
 #question3 .option-card:nth-child(1) .option-image {
     background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/velo.png');
     background-size: cover;
@@ -305,7 +306,7 @@ get_header();
      font-family:'MusticaPro', sans-serif;
 }
 
-/* Images Question 4 - Métaphores */
+
 #question4 .option-card:nth-child(1) .option-image {
     background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/ballon.png');
     background-size: cover;
@@ -360,18 +361,21 @@ get_header();
     cursor: pointer;
     border: 2px solid transparent;
     font-family: 'Coolvetica', Arial, sans-serif;
+    letter-spacing: 3px;
 }
 
 .btn-orange {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-    border: 2px solid #ff7f50;
+    border: 2px solid #F6843F;
+    padding: 12px 30px;
 }
 
 .btn-orange:hover:not(:disabled) {
-    background-color: #ff6a3d;
+    background-color: #F6843F;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
+    box-shadow: 0 4px 10px rgba(255, 127, 80, 0.64);
+    padding: 12px 30px;
 }
 
 .btn-orange:disabled {
@@ -381,16 +385,19 @@ get_header();
 
 .btn-outline {
     background-color: transparent;
-    color: #ff7f50;
-    border: 2px solid #ff7f50;
+    color: #F6843F;
+    border: 2px solid #F6843F;
+    padding: 12px 30px;
 }
 
 .btn-outline:hover {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
+    padding: 12px 30px;
 }
 
-/* Responsive */
+
+
 @media (max-width: 1024px) {
     .options-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -436,6 +443,8 @@ get_header();
     }
 }
 </style>
+
+
 
 <script>
 let answers = {};

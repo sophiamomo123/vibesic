@@ -85,8 +85,10 @@ get_header();
     </main>
 </div>
 
+
+
 <style>
-    /* Fond pour la page d'inscription */
+    
     body.page-template-page-register {
         background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
         background-size: cover;
@@ -103,6 +105,7 @@ get_header();
         align-items: center;
         padding: 50px 20px;
         background-color: #ffffff;
+
     }
 
     .vibesic-main {
@@ -112,24 +115,31 @@ get_header();
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
 
     .auth-form {
         max-width: 500px;
         width: 100%;
         margin: 0 auto;
-    }
 
-    .form-container {
-        background-color: rgba(255, 255, 255, 0.95);
-        padding: 50px;
-        border-radius: 15px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-        width: 100%;
     }
+.form-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    width: 100%;
+     box-shadow: 0 0 0 4px #C84545, 0 0 0 8px #84B82A, 0 0 0 12px #FCE977, 0 0 0 16px #26A9D8;
+    border-radius: 18px;
+    background: #fff;
+    position: relative;
+    z-index: 2;
+}
+    
 
     .form-title {
-        color: #ff7f50;
+        color: #F6843F;
         font-size: 28px;
         margin-bottom: 30px;
         text-align: center;
@@ -160,7 +170,7 @@ get_header();
     }
 
     .form-group input:focus {
-        border-color: #ff7f50;
+        border-color: #F6843F;
     }
 
     .submit-btn {
@@ -182,14 +192,14 @@ get_header();
     }
 
     .btn-orange {
-        background-color: #ff7f50;
+        background-color: #F6843F;
         color: white;
-        border: 2px solid #ff7f50;
+        border: 2px solid #F6843F;
     }
 
     .btn-orange:hover {
-        background-color: #ff6a3d;
-        border-color: #ff6a3d;
+        background-color: #F6843F;
+        border-color: #F6843F;
         transform: translateY(-2px);
         box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
     }
@@ -216,7 +226,7 @@ get_header();
     }
 
     .form-footer a {
-        color: #ff7f50;
+        color: #F6843F;
         text-decoration: none;
         font-weight: bold;
     }
@@ -225,7 +235,8 @@ get_header();
         text-decoration: underline;
     }
 
-    /* Responsive */
+
+   
     @media (max-width: 768px) {
         .form-container {
             padding: 30px 25px;
@@ -246,6 +257,8 @@ get_header();
         }
     }
 </style>
+
+
 
 <?php
 get_footer();

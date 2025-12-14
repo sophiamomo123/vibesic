@@ -7,7 +7,7 @@
 get_header();
 ?>
 
-<div class="quiz-intro-page">
+<div class="quiz-intro-page orange-blur">
     <main class="quiz-main">
         <div class="quiz-content">
             <div class="quiz-left">
@@ -16,7 +16,7 @@ get_header();
                     à notre <span class="highlight">quiz interactif !</span>
                 </h1>
                 
-                <p class="quiz-description">
+                <p class="quiz-description fadein-block">
                     Il y aura 4 questions auxquelles vous devrez choisir une image qui vous 
                     inspire le plus afin de découvrir votre humeur d'aujourd'hui
                 </p>
@@ -26,12 +26,13 @@ get_header();
                 </button>
             </div>
             <div class="quiz-right">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Introquiz.png" alt="Avatars des émotions" class="avatars-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Tableau.svg" alt="Avatars des émotions" class="avatars-image">
 </div>
             </div>
         </div>
     </main>
 </div>
+
 
 <style>
 .quiz-intro-page {
@@ -73,20 +74,26 @@ get_header();
 }
 
 .quiz-title .highlight {
-    color: #ff7f50;
+    color: #F6843F;
+    font-weight: bold;
+    
 }
 
 .quiz-description {
     font-size: 16px;
     line-height: 1.6;
-    color: #333;
+    color: #000000ff;
     margin-bottom: 40px;
 }
 
 .quiz-start-btn {
-    padding: 15px 50px;
-    font-size: 16px;
+    font-size: 13px;
     border: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    padding: 10px 40px;
+    gap: 10px;
+    
 }
 .quiz-right {
     display: flex;
@@ -99,40 +106,58 @@ get_header();
     width: 500px;
     height: auto;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(226, 112, 60, 0.94);
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 1440px) {
     .avatars-image {
         width: 400px;
+        width: 100%;
+        max-width: 470px;
     }
 }
 
-@media (max-width: 768px) {
-    .avatars-image {
-        width: 100%;
-        max-width: 350px;
-    }
-}
 
 .btn-orange {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-    border: 2px solid #ff7f50;
+    border: 2px solid #F6843F;
     border-radius: 25px;
     cursor: pointer;
+    padding: 9px 45px;
+    gap: 10px;
+    
 }
 
+
 .btn-orange:hover {
-    background-color: #ff6a3d;
-    border-color: #ff6a3d;
+    background-color: #F6843F;
+    border-color: #F6843F;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
     border-radius: 25px;
+    padding: 12px 40px;
+    gap: 10px;
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .quiz-content {
+        padding: 70px 80px;
+    }
+    
+    .quiz-title {
+        font-size: 38px;
+    }
+    
+    .avatars-image {
+        width: 450px;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
     .quiz-content {
         grid-template-columns: 1fr;
         gap: 50px;
@@ -193,6 +218,8 @@ get_header();
 }
 </style>
 
+
+
 <script>
     
 function startQuiz() {
@@ -200,6 +227,8 @@ function startQuiz() {
     window.location.href = '<?php echo home_url('/quiz-questions'); ?>';
 }
 </script>
+
+
 
 <?php
 get_footer();

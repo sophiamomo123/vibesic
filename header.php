@@ -10,7 +10,10 @@
     
     <?php wp_head(); ?>
     
+
+
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -18,8 +21,8 @@
         }
 
         body {
-        
-            font-family: 'coolvetica', sans-serif;
+            margin: 0;
+            padding: 0;
             font-weight: 400;
             font-style: normal;
             font-family:'MusticaPro', sans-serif;
@@ -30,7 +33,7 @@
 
         .vibesic-header {
             background-color: #ffffff;
-            padding: 20px 50px;
+            padding: 18px 55px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,17 +43,17 @@
         }
 
        .vibesic-logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
     
 }
 
-.logo-image {
-    height: 60px;
-    width: auto;
-    display: block;
+        .logo-image {
+           height: 60px;
+           width: auto;
+           display: block;
     
 }
 
@@ -77,29 +80,38 @@
             display: inline-block;
             cursor: pointer;
             border: 2px solid transparent;
+            padding: 8px 40px;
         }
 
         .btn-orange {
-            background-color: #ff7f50;
+            background-color: #F6843F;
             color: white;
-            border: 2px solid #ff7f50;
+            border: 2px solid #F6843F;
+            gap: 10px;
+            padding: 8px 40px;
+            border-radius: 25px;
+            cursor: pointer;
         }
 
         .btn-orange:hover {
-            background-color: #ff6a3d;
-            border-color: #ff6a3d;
+            background-color: #F6843F;
+            border-color: #F6843F;
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
+            padding: 10px 40px;
+            gap: 10px;
+            border-radius: 25px;
+            cursor: pointer;
         }
 
         .btn-outline {
             background-color: transparent;
-            color: #ff7f50;
-            border: 2px solid #ff7f50;
+            color: #F6843F;
+            border: 2px solid #F6843F;
         }
 
         .btn-outline:hover {
-            background-color: #ff7f50;
+            background-color: #F6843F;
             color: white;
         }
 
@@ -110,7 +122,7 @@
         }
 
         .user-welcome strong {
-            color: #ff7f50;
+            color: #F6843F;
         }
 
         /* Menu hamburger pour mobile */
@@ -119,7 +131,7 @@
             background: none;
             border: none;
             font-size: 24px;
-            color: #ff7f50;
+            color: #F6843F;
             cursor: pointer;
         }
 
@@ -187,16 +199,20 @@
                 <span class="user-welcome">
                     Bonjour <strong><?= esc_html(wp_get_current_user()->display_name); ?></strong>
                 </span>
-                <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="header-btn btn-orange">SE DÉCONNECTER</a>
+                <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="header-btn btn-orange">DÉCONNEXION</a>
             <?php else : ?>
                 <a href="<?= esc_url(home_url('/template-register')); ?>" class="header-btn btn-orange">S'INSCRIRE</a>
-                <a href="<?= esc_url(home_url('/template-login')); ?>" class="header-btn btn-orange">SE CONNECTER</a>
+                 <a href="#" class="header-btn btn-orange" onclick="showLogin(); return false;">CONNEXION</a>
             <?php endif; ?>
         </nav>
     </header>
 
     <main id="main-content">
 
+
+
+
+    
     <script>
         function toggleMobileMenu() {
             const nav = document.getElementById('headerNav');

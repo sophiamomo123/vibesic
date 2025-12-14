@@ -39,6 +39,7 @@ if (isset($_POST['signup_submit'])) {
     }
 }
 
+
 get_header();
 ?>
 
@@ -46,14 +47,14 @@ get_header();
     <?php if (is_user_logged_in()) : ?>
         <!-- Si l'utilisateur est déjà connecté -->
         <main class="vibesic-main">
-            <div class="auth-form">
+            <div class="auth-form fadein-block">
                 <div class="form-container">
                     <h2 class="form-title">Déjà connecté</h2>
                     <div class="success-box">
                         <p>✅ Vous êtes déjà connecté en tant que <strong><?= esc_html(wp_get_current_user()->display_name); ?></strong></p>
                         <div class="action-buttons">
                             <a href="<?= esc_url(home_url('/quiz')); ?>" class="btn btn-orange">ALLER AU QUIZ</a>
-                            <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="btn btn-outline">SE DÉCONNECTER</a>
+                            <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="btn btn-outline">DÉCONNEXION</a>
                         </div>
                     </div>
                 </div>
@@ -62,8 +63,9 @@ get_header();
     <?php else : ?>
         <!-- Formulaire d'inscription -->
         <main class="vibesic-main">
-            <div class="auth-form">
+            <div class="auth-form fadein-block">
                 <div class="form-container">
+                        <div class="form-blur-bg"></div>
                     <h2 class="form-title">Créer un compte</h2>
                     
                     <?php if (isset($errors) && !empty($errors)) : ?>
@@ -74,27 +76,74 @@ get_header();
                         </div>
                     <?php endif; ?>
                     
-                    <form method="post" action="<?= esc_url($_SERVER['REQUEST_URI']); ?>" class="vibesic-form">
-                        <div class="form-group">
-                            <label for="username">Nom d'utilisateur</label>
-                            <input type="text" name="username" id="username" value="<?= isset($_POST['username']) ? esc_attr($_POST['username']) : ''; ?>" required>
+                    <div style="display: flex; align-items: flex-start; gap: 32px;">
+                        <div class="register-icons" style="display: flex; flex-direction: column; gap: 24px; align-items: flex-end; justify-content: flex-start; min-width: 70px;">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Ordi.svg" alt="Ordi" style="width:48px; height:auto;">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Crayon.svg" alt="Crayon" style="width:36px; height:auto;">
                         </div>
-                        <div class="form-group">
-                            <label for="email">Adresse email</label>
-                            <input type="email" name="email" id="email" value="<?= isset($_POST['email']) ? esc_attr($_POST['email']) : ''; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" name="password" id="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirm_password">Confirmer le mot de passe</label>
-                            <input type="password" name="confirm_password" id="confirm_password" required>
-                        </div>
-                        <button type="submit" name="signup_submit" class="btn btn-orange submit-btn">S'INSCRIRE</button>
-                        <div class="form-footer">
-                            Vous avez déjà un compte ? 
-                            <a href="<?= esc_url(home_url('/login')); ?>">connectez-vous</a>
+                        <div style="flex:1;">
+                            <form method="post" action="<?= esc_url($_SERVER['REQUEST_URI']); ?>" class="vibesic-form">
+                                <div class="form-group">
+                                    <label for="username">Nom d'utilisateur</label>
+                                    <input type="text" name="username" id="username" value="<?= isset($_POST['username']) ? esc_attr($_POST['username']) : ''; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Adresse email</label>
+                                    <input type="email" name="email" id="email" value="<?= isset($_POST['email']) ? esc_attr($_POST['email']) : ''; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" name="password" id="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm_password">Confirmer le mot de passe</label>
+                                    <input type="password" name="confirm_password" id="confirm_password" required>
+                                </div>
+                                <button type="submit" name="signup_submit" class="btn btn-orange submit-btn">S'INSCRIRE</button>
+                                <div class="form-footer">
+                                    Vous avez déjà un compte ? 
+                                     <a href="#" onclick="showLoginForm(); return false;">Se connecter</a>
+                                </div>
+                                <script>
+                                function showLoginForm() {
+                                    document.querySelector('.form-container').style.display = 'none';
+                                    document.getElementById('loginForm').style.display = 'block';
+                                }
+                                </script>
+                                <!-- Formulaire de connexion caché -->
+                                <div id="loginForm" class="auth-form" style="display:none;">
+                                    <div class="form-container">
+                                        <div class="form-blur-bg"></div>
+                                        <h2 class="form-title">Connectez-vous</h2>
+                                        <form method="post" action="<?= esc_url(home_url('/template-login')); ?>" class="vibesic-form">
+                                            <div class="form-group">
+                                                <label for="user_login">Nom d'utilisateur</label>
+                                                <input type="text" name="log" id="user_login" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="user_password">Mot de passe</label>
+                                                <input type="password" name="pwd" id="user_password" required>
+                                            </div>
+                                            <div class="form-group-checkbox">
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" name="rememberme" id="rememberme">
+                                                    <span>Se souvenir de moi</span>
+                                                </label>
+                                            </div>
+                                            <button type="submit" name="login_submit" class="btn btn-orange submit-btn">CONNEXION</button>
+                                            <div class="form-footer">
+                                                Vous n'avez pas de compte ?
+                                                <a href="#" onclick="showSignupForm(); return false;">S'inscrire</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <script>
+                                function showSignupForm() {
+                                    document.getElementById('loginForm').style.display = 'none';
+                                    document.querySelector('.form-container').style.display = 'block';
+                                }
+                                </script>
                         </div>
                     </form>
                 </div>
@@ -103,10 +152,13 @@ get_header();
     <?php endif; ?>
 </div>
 
+
+
+
 <style>
 /* Fond pour la page d'inscription */
 body.page-template-template-register {
-    background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
+    background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/Flou.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -145,7 +197,7 @@ body.page-template-template-register {
 }
 
 .success-box strong {
-    color: #ff7f50;
+    color: #F6843F;
     font-weight: bold;
 }
 
@@ -167,29 +219,35 @@ body.page-template-template-register {
     display: inline-block;
     cursor: pointer;
     border: 2px solid transparent;
+    padding: 10px 40px;
+    gap: 10px;
 }
 
 .btn-orange {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-    border: 2px solid #ff7f50;
+    border: 2px solid #F6843F;
+    padding: 10px 40px;
+    gap: 10px;
 }
 
 .btn-orange:hover {
-    background-color: #ff6a3d;
-    border-color: #ff6a3d;
+    background-color: #F6843F;
+    border-color: #F6843F;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
+    padding: 10px 40px;
+    gap: 10px;
 }
 
 .btn-outline {
     background-color: transparent;
-    color: #ff7f50;
-    border: 2px solid #ff7f50;
+    color: #F6843F;
+    border: 2px solid #F6843F;
 }
 
 .btn-outline:hover {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
 }
 
@@ -212,17 +270,22 @@ body.page-template-template-register {
     width: 100%;
     margin: 0 auto;
 }
-
 .form-container {
     background-color: rgba(255, 255, 255, 0.95);
     padding: 50px;
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     width: 100%;
+     
+    border-radius: 18px;
+    background: #fff;
+    position: relative;
+    z-index: 2;
 }
 
+
 .form-title {
-    color: #ff7f50;
+    color: #F6843F;
     font-size: 28px;
     margin-bottom: 30px;
     text-align: center;
@@ -257,13 +320,15 @@ body.page-template-template-register {
 }
 
 .form-group input:focus {
-    border-color: #ff7f50;
+    border-color: #F6843F;
 }
 
 .submit-btn {
     width: 100%;
     margin-top: 10px;
     border: none;
+    padding: 10px 40px;
+
 }
 
 .form-footer {
@@ -274,7 +339,7 @@ body.page-template-template-register {
 }
 
 .form-footer a {
-    color: #ff7f50;
+    color: #F6843F;
     text-decoration: none;
     font-weight: bold;
 }
@@ -283,7 +348,6 @@ body.page-template-template-register {
     text-decoration: underline;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .form-container {
         padding: 30px 25px;
@@ -312,6 +376,8 @@ body.page-template-template-register {
     }
 }
 </style>
+
+
 
 <?php
 get_footer();

@@ -67,9 +67,8 @@ get_header();
 </div>
 
 <style>
-    /* Fond pour la page de connexion */
     body.page-template-page-login {
-        background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
+        background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/Flou.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -110,7 +109,7 @@ get_header();
     }
 
     .form-title {
-        color: #ff7f50;
+        color: #F6843F;
         font-size: 28px;
         margin-bottom: 30px;
         text-align: center;
@@ -141,7 +140,7 @@ get_header();
     }
 
     .form-group input:focus {
-        border-color: #ff7f50;
+        border-color: #F6843F;
     }
 
     .submit-btn {
@@ -160,19 +159,25 @@ get_header();
         transition: all 0.3s ease;
         display: inline-block;
         border: 2px solid transparent;
+        padding: 10px 40px;
+        gap: 10px;
     }
 
     .btn-orange {
-        background-color: #ff7f50;
+        background-color: #F6843F;
         color: white;
-        border: 2px solid #ff7f50;
+        border: 2px solid #F6843F;
+        padding: 10px 40px;
+        gap: 10px;
     }
 
     .btn-orange:hover {
-        background-color: #ff6a3d;
-        border-color: #ff6a3d;
+        background-color: #F6843F;
+        border-color: #F6843F;
         transform: translateY(-2px);
         box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
+        padding: 10px 40px;
+        gap: 10px;
     }
 
     .alert-message {
@@ -203,7 +208,7 @@ get_header();
     }
 
     .form-footer a {
-        color: #ff7f50;
+        color: #F6843F;
         text-decoration: none;
         font-weight: bold;
     }

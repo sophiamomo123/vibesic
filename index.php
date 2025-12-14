@@ -1,32 +1,30 @@
 <?php
 /**
  * Template Name: Index Page
- * Description: Page d'accueil Vibesic
  */
 
 // Traitement de l'inscription
-$signup_error = null;
 if (isset($_POST['signup_submit'])) {
     $username = sanitize_user($_POST['username']);
     $email = sanitize_email($_POST['email']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    $errors = array();
+    $signup_errors = array();
 
     if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
-        $errors[] = 'Veuillez remplir tous les champs.';
+        $signup_errors[] = 'Veuillez remplir tous les champs.';
     }
     if ($password !== $confirm_password) {
-        $errors[] = 'Les mots de passe ne correspondent pas.';
+        $signup_errors[] = 'Les mots de passe ne correspondent pas.';
     }
     if (username_exists($username)) {
-        $errors[] = 'Ce nom d\'utilisateur existe déjà.';
+        $signup_errors[] = 'Ce nom d\'utilisateur existe déjà.';
     }
     if (email_exists($email)) {
-        $errors[] = 'Cet email est déjà utilisé.';
+        $signup_errors[] = 'Cet email est déjà utilisé.';
     }
 
-    if (empty($errors)) {
+    if (empty($signup_errors)) {
         $user_id = wp_create_user($username, $password, $email);
         if (!is_wp_error($user_id)) {
             wp_set_current_user($user_id);
@@ -34,7 +32,34 @@ if (isset($_POST['signup_submit'])) {
             wp_redirect(home_url('/quiz'));
             exit;
         } else {
-            $errors[] = 'Erreur lors de la création du compte.';
+            $signup_errors[] = 'Erreur lors de la création du compte.';
+        }
+    }
+}
+
+// Traitement de la connexion
+if (isset($_POST['login_submit'])) {
+    $username = sanitize_text_field($_POST['log']);
+    $password = $_POST['pwd'];
+    $remember = isset($_POST['rememberme']);
+    $login_errors = array();
+
+    if (empty($username) || empty($password)) {
+        $login_errors[] = 'Veuillez remplir tous les champs.';
+    } else {
+        $creds = array(
+            'user_login'    => $username,
+            'user_password' => $password,
+            'remember'      => $remember
+        );
+
+        $user = wp_signon($creds, false);
+
+        if (is_wp_error($user)) {
+            $login_errors[] = 'Nom d\'utilisateur ou mot de passe incorrect.';
+        } else {
+            wp_redirect(home_url('/quiz'));
+            exit;
         }
     }
 }
@@ -52,23 +77,26 @@ get_header();
                     <div class="success-box">
                         <p>✅ Vous êtes déjà connecté en tant que <strong><?= esc_html(wp_get_current_user()->display_name); ?></strong></p>
                         <div class="action-buttons">
-                            <a href="<?= esc_url(home_url('/quiz')); ?>" class="btn btn-orange">ALLER AU QUIZ</a>
+                            <a href="<?= esc_url(home_url('/quiz')); ?>" class="btn btn-orange">QUIZ</a>
                             <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="btn btn-outline">SE DÉCONNECTER</a>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
+        
     <?php else : ?>
-        <!-- Formulaire d'inscription -->
+        <!-- Formulaires pour utilisateur non connecté -->
         <main class="vibesic-main">
-            <div class="auth-form">
+            
+            <!-- Formulaire d'inscription -->
+            <div id="signupForm" class="auth-form">
                 <div class="form-container">
                     <h2 class="form-title">Créer un compte</h2>
                     
-                    <?php if (isset($errors) && !empty($errors)) : ?>
+                    <?php if (isset($signup_errors) && !empty($signup_errors)) : ?>
                         <div class="alert-message error">
-                            <?php foreach ($errors as $error) : ?>
+                            <?php foreach ($signup_errors as $error) : ?>
                                 ❌ <?= esc_html($error); ?><br>
                             <?php endforeach; ?>
                         </div>
@@ -94,19 +122,57 @@ get_header();
                         <button type="submit" name="signup_submit" class="btn btn-orange submit-btn">S'INSCRIRE</button>
                         <div class="form-footer">
                             Vous avez déjà un compte ? 
-                            <a href="<?= esc_url(home_url('/login')); ?>">connectez-vous</a>
+                            <a href="#" onclick="showLogin(); return false;">SE CONNECTER</a>
                         </div>
                     </form>
                 </div>
             </div>
+            
+            <!-- Formulaire de connexion -->
+            <div id="loginForm" class="auth-form" style="display: none;">
+                <div class="form-container">
+                    <h2 class="form-title">Se connecter</h2>
+                    
+                    <?php if (isset($login_errors) && !empty($login_errors)) : ?>
+                        <div class="alert-message error">
+                            <?php foreach ($login_errors as $error) : ?>
+                                ❌ <?= esc_html($error); ?><br>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <form method="post" action="<?= esc_url($_SERVER['REQUEST_URI']); ?>" class="vibesic-form">
+                        <div class="form-group">
+                            <label for="log">Nom d'utilisateur</label>
+                            <input type="text" name="log" id="log" value="<?= isset($_POST['log']) ? esc_attr($_POST['log']) : ''; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Mot de passe</label>
+                            <input type="password" name="pwd" id="pwd" required>
+                        </div>
+                        <div class="form-group-checkbox">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="rememberme" id="rememberme">
+                                <span>Se souvenir de moi</span>
+                            </label>
+                        </div>
+                        <button type="submit" name="login_submit" class="btn btn-orange submit-btn">SE CONNECTER</button>
+                        <div class="form-footer">
+                            Vous n'avez pas de compte ? 
+                            <a href="#" onclick="showSignup(); return false;">S'INSCRIRE</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
         </main>
     <?php endif; ?>
 </div>
 
 <style>
-/* Fond pour la page d'inscription */
-body.page-template-template-register {
-    background-image: url('http://vibesic.local/wp-content/uploads/2025/12/Flou.png');
+/* Fond pour la page */
+body {
+    background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/Flou.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -120,7 +186,6 @@ body.page-template-template-register {
     justify-content: center;
     align-items: center;
     padding: 50px 20px;
-    background-color: transparent;
 }
 
 .vibesic-main {
@@ -141,11 +206,10 @@ body.page-template-template-register {
     font-size: 16px;
     color: #333;
     margin-bottom: 30px;
-    line-height: 1.6;
 }
 
 .success-box strong {
-    color: #ff7f50;
+    color: #F6843F;
     font-weight: bold;
 }
 
@@ -154,7 +218,6 @@ body.page-template-template-register {
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 50px;
 }
 
 .btn {
@@ -166,71 +229,65 @@ body.page-template-template-register {
     transition: all 0.3s ease;
     display: inline-block;
     cursor: pointer;
-    border: 2px solid transparent;
+    padding: 8px 40px;
+    gap: 10px;
 }
 
 .btn-orange {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-    border: 2px solid #ff7f50;
+    border: none;
+    padding: 8px 40px;
+    gap: 10px;
 }
 
 .btn-orange:hover {
-    background-color: #ff6a3d;
-    border-color: #ff6a3d;
+    background-color: #F6843F;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
+    padding: 10px 40px;
+    gap: 10px;
 }
 
 .btn-outline {
     background-color: transparent;
-    color: #ff7f50;
-    border: 2px solid #ff7f50;
+    color: #F6843F;
+    border: 2px solid #F6843F;
 }
 
 .btn-outline:hover {
-    background-color: #ff7f50;
+    background-color: #F6843F;
     color: white;
-}
-
-.alert-message {
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    font-size: 14px;
-    line-height: 1.8;
 }
 
 .alert-message.error {
     background-color: #ffe5e5;
     color: #d32f2f;
     border: 2px solid #ffcdd2;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
 }
 
 .auth-form {
     max-width: 500px;
     width: 100%;
-    margin: 0 auto;
 }
 
 .form-container {
     background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 50px;
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    width: 100%;
 }
 
 .form-title {
-    color: #ff7f50;
+    color: #F6843F;
     font-size: 28px;
     margin-bottom: 30px;
     text-align: center;
     font-weight: bold;
-}
-
-.vibesic-form {
-    width: 100%;
 }
 
 .form-group {
@@ -246,24 +303,52 @@ body.page-template-template-register {
     color: #333;
 }
 
-.form-group input {
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
     width: 100%;
     padding: 12px 20px;
     border: 2px solid #ddd;
-    border-radius: 25px;
+    border-radius: 12px;
     font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s;
+    box-sizing: border-box;
 }
 
 .form-group input:focus {
-    border-color: #ff7f50;
+    border-color: #F6843F;
+    outline: none;
+}
+
+.form-group-checkbox {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+}
+
+
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.checkbox-label span {
+    user-select: none;
 }
 
 .submit-btn {
     width: 100%;
     margin-top: 10px;
-    border: none;
+    letter-spacing: 2px;
 }
 
 .form-footer {
@@ -274,7 +359,7 @@ body.page-template-template-register {
 }
 
 .form-footer a {
-    color: #ff7f50;
+    color: #F6843F;
     text-decoration: none;
     font-weight: bold;
 }
@@ -283,12 +368,11 @@ body.page-template-template-register {
     text-decoration: underline;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .form-container {
         padding: 30px 25px;
     }
-
+    
     .form-title {
         font-size: 24px;
     }
@@ -298,130 +382,36 @@ body.page-template-template-register {
     .vibesic-frontpage {
         padding: 30px 15px;
     }
-
-    .form-container {
-        padding: 30px 20px;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-    }
 }
-</style>
-
-<?php
-get_footer();
-?>
-
-
-
-
-
-
-
-
-
-
-get_header();
-?>
-
-<div class="vibesic-frontpage">
-    <?php if (is_user_logged_in()) : ?>
-        <!-- Version connectée -->
-        <main class="vibesic-main">
-            <div id="homeViewConnected">
-                <div class="welcome-message">
-                    <p>Bienvenue <strong><?= esc_html(wp_get_current_user()->display_name); ?></strong>!</p>
-                </div>
-                
-                <h1 class="main-title">
-                    <span class="highlight">Découvrez</span> <br>la musique
-                    instrumentale par <br>
-                    votre humeur du jour
-                </h1>
-                
-                <div class="action-buttons">
-                    <a href="<?php echo home_url('/quiz'); ?>" class="btn btn-explore">EXPLORER</a>
-                </div>
-            </div>
-        </main>
-        
-    <?php else : ?>
-        <!-- Version non connectée -->
-        <main class="vibesic-main">
-            <div id="homeView">
-                <h1 class="main-title">
-                    <span class="highlight">Découvrez</span><br>la musique
-                     instrumentale par<br>
-                    votre humeur du jour
-                </h1>
-                
-                <div class="action-buttons">
-                    <a href="<?php echo home_url('/quiz'); ?>" class="btn btn-explore">EXPLORER</a>
-                </div>
-            </div>
-        </main>
-    <?php endif; ?>
-</div>
-<!-- Section Nos Objectifs -->
-<section class="objectifs-section">
-    <div class="objectifs-container">
-        <h2 class="objectifs-title">Nos objectifs ?</h2>
-        
-        <div class="objectifs-cards">
-            <!-- Carte Fonctionnels -->
-            <div class="objectif-card">
-                <h3 class="card-title">Fonctionnels</h3>
-                <ul class="card-list">
-                    <li>Proposer une expérience musicale personnalisée</li>
-                    <li>Simplifier la découverte musicale</li>
-                    <li>Rendre l'expérience fun et intuitive</li>
-                    <li>Encourager un usage quotidien</li>
-                </ul>
-            </div>
-            
-            <!-- Carte Utilisateurs -->
-            <div class="objectif-card">
-                <h3 class="card-title">Utilisateurs</h3>
-                <ul class="card-list">
-                    <li>Comprendre son humeur et se sentir accompagné</li>
-                    <li>Créer un espace personnel musical</li>
-                    <li>Découvrir, explorer, s'évader</li>
-                    <li>Vivre une expérience positive et personnalisée</li>
-                </ul>
-            </div>
-        </div>
-        
-        <!-- Section inscription -->
-        <div class="inscription-cta">
-            <div class="cta-text">
-                <h3>Inscris-toi en un clin d'œil et débloque l'accès complet à toute la bibliothèque !</h3>
-                <p>Feuillette, découvre, explore... et surtout enregistre tes musiques préférées pour les retrouver à tout moment.</p>
-            </div>
-            <div class="cta-illustration">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/bonhomme.png" alt="Inscription">
-            </div>
-        </div>
-    </div>
-</section>
-
-
 </style>
 
 <script>
-// Redirect to login page
+// Basculer vers le formulaire de connexion
 function showLogin() {
-    window.location.href = '<?php echo esc_url(home_url('/template-login')); ?>';
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Redirect to signup page
+// Basculer vers le formulaire d'inscription
 function showSignup() {
-    window.location.href = '<?php echo esc_url(home_url('/template-register')); ?>';
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// Afficher le bon formulaire si erreur
+<?php if (isset($login_errors) && !empty($login_errors)) : ?>
+    document.addEventListener('DOMContentLoaded', function() {
+        showLogin();
+    });
+<?php endif; ?>
+
+<?php if (isset($signup_errors) && !empty($signup_errors)) : ?>
+    document.addEventListener('DOMContentLoaded', function() {
+        showSignup();
+    });
+<?php endif; ?>
 </script>
 
 <?php
