@@ -71,9 +71,7 @@
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 40px;
-    margin-left: 0;
-    
-    
+    margin-left: 0;  
 }
 
 .footer-columns {
@@ -101,7 +99,6 @@
     opacity: 0.8;
 }
 
-/* Séparateur vertical blanc */
 .footer-divider {
     width: 2px;
     height: 150px;
@@ -109,7 +106,6 @@
     opacity: 0.5;
 }
 
-/* Colonne sociale à droite */
 .social-column {
     align-items: center;
     justify-content: center;
@@ -153,7 +149,7 @@
     font-weight: 500;
 }
 
-/* Responsive */
+
 @media (max-width: 1024px) {
     .footer-columns {
         flex-wrap: wrap;
@@ -180,6 +176,7 @@
     }
 }
 </style>
+
 
 <?php wp_footer(); ?>
 </body>

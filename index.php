@@ -88,6 +88,10 @@ get_header();
     <?php else : ?>
         <!-- Formulaires pour utilisateur non connecté -->
         <main class="vibesic-main">
+            <!-- Image gauche - Ordi (inscription) / Ampoule (connexion) -->
+            <div class="side-image left-image">
+                <img id="leftImage" src="<?php echo get_template_directory_uri(); ?>/assets/images/Ordi.svg" alt="Personnage">
+            </div>
             
             <!-- Formulaire d'inscription -->
             <div id="signupForm" class="auth-form">
@@ -101,7 +105,8 @@ get_header();
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-                    
+                   
+                        
                     <form method="post" action="<?= esc_url($_SERVER['REQUEST_URI']); ?>" class="vibesic-form">
                         <div class="form-group">
                             <label for="username">Nom d'utilisateur</label>
@@ -127,7 +132,7 @@ get_header();
                     </form>
                 </div>
             </div>
-            
+
             <!-- Formulaire de connexion -->
             <div id="loginForm" class="auth-form" style="display: none;">
                 <div class="form-container">
@@ -156,7 +161,7 @@ get_header();
                                 <span>Se souvenir de moi</span>
                             </label>
                         </div>
-                        <button type="submit" name="login_submit" class="btn btn-orange submit-btn">SE CONNECTER</button>
+                        <button type="submit" name="login_submit" class="btn btn-orange submit-btn">CONNEXION</button>
                         <div class="form-footer">
                             Vous n'avez pas de compte ? 
                             <a href="#" onclick="showSignup(); return false;">S'INSCRIRE</a>
@@ -164,20 +169,17 @@ get_header();
                     </form>
                 </div>
             </div>
+
+            <!-- Image droite - Crayon (inscription) / Casque (connexion) -->
+            <div class="side-image right-image">
+                <img id="rightImage" src="<?php echo get_template_directory_uri(); ?>/assets/images/Crayon.svg" alt="Personnage">
+            </div>
             
         </main>
     <?php endif; ?>
 </div>
 
 <style>
-/* Fond pour la page */
-body {
-    background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/Flou.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
 
 .vibesic-frontpage {
     min-height: calc(100vh - 200px);
@@ -190,11 +192,44 @@ body {
 
 .vibesic-main {
     text-align: center;
-    max-width: 1200px;
+    max-width: 1400px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 0;
+}
+
+/* Images sur les côtés du formulaire */
+.side-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-image img {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+    
+}
+
+.left-image {
+    margin-right: 110px;
+    margin-top: 500px;
+    
+   
+}
+
+.left-image img {
+    max-width: 200px; /* Plus petit que l'image droite */
+   
+}
+
+.right-image {
+    margin-left: 110px;
+    margin-top: 500px;
+   
 }
 
 .success-box {
@@ -229,7 +264,7 @@ body {
     transition: all 0.3s ease;
     display: inline-block;
     cursor: pointer;
-    padding: 8px 40px;
+    padding: 9px 45px;
     gap: 10px;
 }
 
@@ -237,7 +272,7 @@ body {
     background-color: #F6843F;
     color: white;
     border: none;
-    padding: 8px 40px;
+    padding: 9px 45px;
     gap: 10px;
 }
 
@@ -245,7 +280,7 @@ body {
     background-color: #F6843F;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
-    padding: 10px 40px;
+    padding: 9px 45px;
     gap: 10px;
 }
 
@@ -279,7 +314,9 @@ body {
     backdrop-filter: blur(10px);
     padding: 50px;
     border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 32px #f6853fab;
+    border: 1px solid #f6853f74;
+    margin-bottom: 130px;
 }
 
 .form-title {
@@ -332,8 +369,6 @@ body {
     color: #666;
 }
 
-
-
 .checkbox-label input[type="checkbox"] {
     margin-right: 8px;
     width: 18px;
@@ -368,6 +403,13 @@ body {
     text-decoration: underline;
 }
 
+/* Responsive - cacher les images sur tablette et mobile */
+@media (max-width: 1024px) {
+    .side-image {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .form-container {
         padding: 30px 25px;
@@ -386,10 +428,26 @@ body {
 </style>
 
 <script>
+// Chemins des images
+const templateUri = '<?php echo get_template_directory_uri(); ?>';
+const signupImages = {
+    left: templateUri + '/assets/images/Ordi.svg',
+    right: templateUri + '/assets/images/Crayon.svg'
+};
+const loginImages = {
+    left: templateUri + '/assets/images/Ampoule.svg',
+    right: templateUri + '/assets/images/Casque.svg'
+};
+
 // Basculer vers le formulaire de connexion
 function showLogin() {
     document.getElementById('signupForm').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
+    
+    // Changer les images
+    document.getElementById('leftImage').src = loginImages.left;
+    document.getElementById('rightImage').src = loginImages.right;
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -397,6 +455,11 @@ function showLogin() {
 function showSignup() {
     document.getElementById('loginForm').style.display = 'none';
     document.getElementById('signupForm').style.display = 'block';
+    
+    // Changer les images
+    document.getElementById('leftImage').src = signupImages.left;
+    document.getElementById('rightImage').src = signupImages.right;
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

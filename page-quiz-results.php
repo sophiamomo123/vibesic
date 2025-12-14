@@ -83,7 +83,7 @@
 
             <!-- Graphique et Légende côte à côte -->
             <div class="chart-legend-container fadein-block" id="chartLegendContainer">
-                <div class="chart-inner">
+                <div class="chart-inner" id="chartLegendCard">
                 <div class="chart-container">
                
                     <canvas id="emotionChart"></canvas>
@@ -203,12 +203,14 @@
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 14px;
             transition: all 0.3s ease;
             display: inline-block;
             cursor: pointer;
             border: 2px solid transparent;
-            padding: 8px 40px;
+            padding: 9px 45px;
+            letter-spacing: 1px;
+            font-family: 'Coolvetica', sans-serif;
         }
 
         .btn-orange {
@@ -216,7 +218,7 @@
             color: white;
             border: 2px solid #F6843F;
             gap: 10px;
-            padding: 8px 40px;
+            padding: 9px 45px;
             border-radius: 25px;
             cursor: pointer;
         }
@@ -226,7 +228,7 @@
             border-color: #F6843F;
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
-            padding: 10px 40px;
+            padding: 9px 45px;
             gap: 10px;
             border-radius: 25px;
             cursor: pointer;
@@ -439,7 +441,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 0 10px;
+    padding: 30px 10px 0 10px;
     flex: 1;
 }
 
@@ -456,6 +458,7 @@
     font-weight: 500;
     font-size: 14px;
     transition: all 0.3s ease;
+    margin-bottom: 8px;
 }
 
 .nav-item:hover {
@@ -1333,6 +1336,9 @@ if (topKeys.length === 2 && maxCount === (total / 2)) {
         container.style.backgroundSize = 'cover';
         container.style.backgroundPosition = 'center';
         container.style.backgroundRepeat = 'no-repeat';
+        // Border dynamique sur la card legend
+        const card = document.getElementById('chartLegendCard');
+        if (card) card.style.border = `3px solid ${c1}`;
     }
 } else {
     dominantEmotion = Object.keys(emotions).reduce((a, b) => emotions[a] > emotions[b] ? a : b);
@@ -1348,6 +1354,9 @@ if (topKeys.length === 2 && maxCount === (total / 2)) {
         container.style.backgroundSize = 'cover';
         container.style.backgroundPosition = 'center';
         container.style.backgroundRepeat = 'no-repeat';
+        // Border dynamique sur la card legend
+        const card = document.getElementById('chartLegendCard');
+        if (card) card.style.border = `3px solid ${c}`;
     }
 }
 

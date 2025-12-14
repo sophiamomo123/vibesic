@@ -368,14 +368,14 @@ get_header();
     background-color: #F6843F;
     color: white;
     border: 2px solid #F6843F;
-    padding: 12px 30px;
+    padding: 9px 45px;
 }
 
 .btn-orange:hover:not(:disabled) {
     background-color: #F6843F;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(255, 127, 80, 0.64);
-    padding: 12px 30px;
+    padding: 9px 45px;
 }
 
 .btn-orange:disabled {

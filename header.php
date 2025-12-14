@@ -33,7 +33,7 @@
 
         .vibesic-header {
             background-color: #ffffff;
-            padding: 18px 55px;
+            padding: 15px 55px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,6 +47,7 @@
             align-items: center;
             text-decoration: none;
             cursor: pointer;
+            margin-top: 10px;
     
 }
 
@@ -66,7 +67,7 @@
 
         .header-nav {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             align-items: center;
         }
 
@@ -80,7 +81,8 @@
             display: inline-block;
             cursor: pointer;
             border: 2px solid transparent;
-            padding: 8px 40px;
+            padding: 9px 45px;
+            margin-top: -10px;
         }
 
         .btn-orange {
@@ -88,7 +90,7 @@
             color: white;
             border: 2px solid #F6843F;
             gap: 10px;
-            padding: 8px 40px;
+            padding: 9px 45px;
             border-radius: 25px;
             cursor: pointer;
         }
@@ -98,7 +100,7 @@
             border-color: #F6843F;
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
-            padding: 10px 40px;
+            padding: 9px 45px;
             gap: 10px;
             border-radius: 25px;
             cursor: pointer;

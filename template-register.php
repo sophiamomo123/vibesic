@@ -1,3 +1,30 @@
+/* Icônes à gauche du formulaire d'inscription */
+.register-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-end;
+    justify-content: flex-start;
+    min-width: 70px;
+}
+.register-icons img {
+    display: block;
+    max-width: 60px;
+    height: auto;
+    margin-bottom: 0;
+}
+@media (max-width: 700px) {
+    .register-icons {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+        min-width: 0;
+        margin-bottom: 10px;
+    }
+    .register-icons img {
+        max-width: 40px;
+    }
+}
 <?php
 /**
  * Template Name: Register Template
@@ -156,14 +183,7 @@ get_header();
 
 
 <style>
-/* Fond pour la page d'inscription */
-body.page-template-template-register {
-    background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/Flou.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
+/
 
 .vibesic-frontpage {
     min-height: calc(100vh - 200px);
@@ -219,7 +239,7 @@ body.page-template-template-register {
     display: inline-block;
     cursor: pointer;
     border: 2px solid transparent;
-    padding: 10px 40px;
+    padding: 9px 45px;
     gap: 10px;
 }
 
@@ -227,7 +247,7 @@ body.page-template-template-register {
     background-color: #F6843F;
     color: white;
     border: 2px solid #F6843F;
-    padding: 10px 40px;
+    padding: 9px 45px;
     gap: 10px;
 }
 

@@ -188,25 +188,14 @@ get_header();
                 <p>FEUILLETTE, DÉCOUVRE, EXPLORE ... <br> et surtout enregistre tes musiques préférées pour les retrouver à tout moment.</p>
             </div>
             <div class="cta-illustration">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Inscription.png" alt="Inscription">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Inscription.svg" alt="Inscription">
             </div>
         </div>
     </div>
 </section>
 
 <style>
-/* Fond pour la page d'accueil */
-body.home,
-body.front-page {
-    background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/Flou.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-color: rgba(255, 255, 255, 1);
 
-
-}
 
 .vibesic-frontpage {
     min-height: calc(100vh - 200px);
@@ -216,8 +205,56 @@ body.front-page {
     align-items: center;
     padding: 50px 20px;
     background-color: transparent;
+    
 }
 
+.vibesic-frontpage {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Formes floues en arrière-plan */
+.vibesic-frontpage::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(246, 133, 63, 0.32) 0%, rgba(246, 132, 63, 0) 70%);
+    filter: blur(80px);
+    z-index: -1;
+    animation: float 8s ease-in-out infinite;
+}
+
+.vibesic-frontpage::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(246, 133, 63, 0.3) 0%, rgba(246, 132, 63, 0) 70%);
+    filter: blur(90px);
+    z-index: -1;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+/* Animation flottante */
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(30px, -30px);
+    }
+}
 .vibesic-main {
     text-align: center;
     max-width: 1200px;
