@@ -15,13 +15,13 @@ get_header();
     
                 <section class="legal-section">
                     <h2>1. Introduction</h2>
-                    <p>La présente Politique de confidentialité a pour objectif d'informer les utilisateurs du site Vibesic sur la manière dont leurs données personnelles sont collectées, utilisées, stockées et protégées. Vibesic propose un questionnaire de quatre questions destiné à estimer l'humeur de l'utilisateur et à lui recommander des playlists musicales instrumentales adaptées. Le site est conçu pour respecter la vie privée de ses utilisateurs et ne collecte que le strict nécessaire.</p>
-                    <p>En utilisant Vibesic, l'utilisateur accepte les pratiques décrites dans cette Politique de confidentialité.</p>
+                    <p>La présente Politique de confidentialité a pour objectif d'informer les utilisateurs du site vibesic sur la manière dont leurs données personnelles sont collectées, utilisées, stockées et protégées. vibesic propose un questionnaire de quatre questions destiné à estimer l'humeur de l'utilisateur et à lui recommander des playlists musicales instrumentales adaptées. Le site est conçu pour respecter la vie privée de ses utilisateurs et ne collecte que le strict nécessaire.</p>
+                    <p>En utilisant vibesic, l'utilisateur accepte les pratiques décrites dans cette Politique de confidentialité.</p>
                 </section>
 
                 <section class="legal-section">
                     <h2>2. Données collectées</h2>
-                    <p>Vibesic peut collecter deux types de données :</p>
+                    <p>vibesic peut collecter deux types de données :</p>
                     
                     <h3>2.1. Données non personnelles (anonymisées)</h3>
                     <ul>
@@ -109,7 +109,7 @@ get_header();
                         <li>droit à la portabilité (si applicable).</li>
                     </ul>
                     <p>Pour exercer ces droits, une demande peut être envoyée à :<br>
-                    <a href="mailto:Vibesic@musique.com">Vibesic@musique.com</a></p>
+                    <a href="mailto:vibesic@musique.com">vibesic@musique.com</a></p>
                 </section>
 
                 <section class="legal-section">
@@ -131,7 +131,7 @@ get_header();
                 <section class="legal-section">
                     <h2>11. Contact</h2>
                     <p>Pour toute question concernant cette Politique de confidentialité :<br>
-                    <a href="mailto:Vibesic@musique.com">Vibesic@musique.com</a></p>
+                    <a href="mailto:Vibesic@musique.com">vibesic@musique.com</a></p>
                 </section>
             </div>
         </div>
@@ -141,8 +141,9 @@ get_header();
 <style>
 .legal-page-container {
     min-height: calc(100vh - 200px);
-    background-color: #f8f9fa;
+    background-color: #ffffffff;
     padding: 80px 20px 60px;
+    font-family: 'MusticaPro', sans-serif;
 }
 
 .legal-content {
@@ -154,9 +155,8 @@ get_header();
     background-color: white;
     padding: 60px;
     border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+   border: 2px solid #F6843F;
 }
-
 .page-title {
     font-family: 'Coolvetica', sans-serif;
     font-size: 48px;
@@ -164,6 +164,7 @@ get_header();
     margin-bottom: 20px;
     text-align: center;
     letter-spacing: 2px;
+   
 }
 
 .intro-text {

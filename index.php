@@ -88,7 +88,7 @@ get_header();
     <?php else : ?>
         <!-- Formulaires pour utilisateur non connecté -->
         <main class="vibesic-main">
-            <!-- Image gauche - Ordi (inscription) / Ampoule (connexion) -->
+
             <div class="side-image left-image">
                 <img id="leftImage" src="<?php echo get_template_directory_uri(); ?>/assets/images/Ordi.svg" alt="Personnage">
             </div>
@@ -170,7 +170,7 @@ get_header();
                 </div>
             </div>
 
-            <!-- Image droite - Crayon (inscription) / Casque (connexion) -->
+            
             <div class="side-image right-image">
                 <img id="rightImage" src="<?php echo get_template_directory_uri(); ?>/assets/images/Crayon.svg" alt="Personnage">
             </div>
@@ -314,7 +314,7 @@ get_header();
     backdrop-filter: blur(10px);
     padding: 50px;
     border-radius: 15px;
-    box-shadow: 0 8px 32px #f6853fab;
+    box-shadow: 0 8px 32px #f6853f66;
     border: 1px solid #f6853f74;
     margin-bottom: 130px;
 }

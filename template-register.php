@@ -1,34 +1,8 @@
-/* Icônes à gauche du formulaire d'inscription */
-.register-icons {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-end;
-    justify-content: flex-start;
-    min-width: 70px;
-}
-.register-icons img {
-    display: block;
-    max-width: 60px;
-    height: auto;
-    margin-bottom: 0;
-}
-@media (max-width: 700px) {
-    .register-icons {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 16px;
-        min-width: 0;
-        margin-bottom: 10px;
-    }
-    .register-icons img {
-        max-width: 40px;
-    }
-}
+/
 <?php
 /**
  * Template Name: Register Template
- * Description: Page d'inscription au style Vibesic
+ * Description: Page d'inscription 
  */
 
 // Traitement de l'inscription
@@ -70,23 +44,6 @@ if (isset($_POST['signup_submit'])) {
 get_header();
 ?>
 
-<div class="vibesic-frontpage">
-    <?php if (is_user_logged_in()) : ?>
-        <!-- Si l'utilisateur est déjà connecté -->
-        <main class="vibesic-main">
-            <div class="auth-form fadein-block">
-                <div class="form-container">
-                    <h2 class="form-title">Déjà connecté</h2>
-                    <div class="success-box">
-                        <p>✅ Vous êtes déjà connecté en tant que <strong><?= esc_html(wp_get_current_user()->display_name); ?></strong></p>
-                        <div class="action-buttons">
-                            <a href="<?= esc_url(home_url('/quiz')); ?>" class="btn btn-orange">ALLER AU QUIZ</a>
-                            <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="btn btn-outline">DÉCONNEXION</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
     <?php else : ?>
         <!-- Formulaire d'inscription -->
         <main class="vibesic-main">
@@ -137,34 +94,7 @@ get_header();
                                     document.getElementById('loginForm').style.display = 'block';
                                 }
                                 </script>
-                                <!-- Formulaire de connexion caché -->
-                                <div id="loginForm" class="auth-form" style="display:none;">
-                                    <div class="form-container">
-                                        <div class="form-blur-bg"></div>
-                                        <h2 class="form-title">Connectez-vous</h2>
-                                        <form method="post" action="<?= esc_url(home_url('/template-login')); ?>" class="vibesic-form">
-                                            <div class="form-group">
-                                                <label for="user_login">Nom d'utilisateur</label>
-                                                <input type="text" name="log" id="user_login" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="user_password">Mot de passe</label>
-                                                <input type="password" name="pwd" id="user_password" required>
-                                            </div>
-                                            <div class="form-group-checkbox">
-                                                <label class="checkbox-label">
-                                                    <input type="checkbox" name="rememberme" id="rememberme">
-                                                    <span>Se souvenir de moi</span>
-                                                </label>
-                                            </div>
-                                            <button type="submit" name="login_submit" class="btn btn-orange submit-btn">CONNEXION</button>
-                                            <div class="form-footer">
-                                                Vous n'avez pas de compte ?
-                                                <a href="#" onclick="showSignupForm(); return false;">S'inscrire</a>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                               
                                 <script>
                                 function showSignupForm() {
                                     document.getElementById('loginForm').style.display = 'none';

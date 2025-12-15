@@ -5,39 +5,6 @@
  * Description: Page d'accueil Vibesic
  */
 
-// Traitement de l'inscription
-if (isset($_POST['signup_submit'])) {
-    $username = sanitize_user($_POST['username']);
-    $email = sanitize_email($_POST['email']);
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    $errors = array();
-
-    if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
-        $errors[] = 'Veuillez remplir tous les champs.';
-    }
-    if ($password !== $confirm_password) {
-        $errors[] = 'Les mots de passe ne correspondent pas.';
-    }
-    if (username_exists($username)) {
-        $errors[] = 'Ce nom d\'utilisateur existe déjà.';
-    }
-    if (email_exists($email)) {
-        $errors[] = 'Cet email est déjà utilisé.';
-    }
-
-    if (empty($errors)) {
-        $user_id = wp_create_user($username, $password, $email);
-        if (!is_wp_error($user_id)) {
-            wp_set_current_user($user_id);
-            wp_set_auth_cookie($user_id);
-            wp_redirect(home_url('/quiz'));
-            exit;
-        } else {
-            $errors[] = 'Erreur lors de la création du compte.';
-        }
-    }
-}
 
 get_header();
 ?>
@@ -87,69 +54,9 @@ get_header();
                     <a href="<?php echo home_url('/quiz'); ?>" class="btn btn-explore">EXPLORER</a>
                 </div>
             </div>
+
             
-            <!-- Formulaire d'inscription (caché par défaut) -->
-            <div id="signupForm" class="auth-form fadein-block" style="display: none;">
-                <div class="form-container">
-                    <h2 class="form-title">Créer un compte</h2>
-                    
-                    <?php if (isset($errors) && !empty($errors)) : ?>
-                        <div class="alert-message error">
-                            <?php foreach ($errors as $error) : ?>
-                                ❌ <?= esc_html($error); ?><br>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <form method="post" action="<?= esc_url($_SERVER['REQUEST_URI']); ?>" class="vibesic-form">
-                        <div class="form-group">
-                            <label for="username">Nom d'utilisateur</label>
-                            <input type="text" name="username" id="username" value="<?= isset($_POST['username']) ? esc_attr($_POST['username']) : ''; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Adresse email</label>
-                            <input type="email" name="email" id="email" value="<?= isset($_POST['email']) ? esc_attr($_POST['email']) : ''; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" name="password" id="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirm_password">Confirmer le mot de passe</label>
-                            <input type="password" name="confirm_password" id="confirm_password" required>
-                        </div>
-                        <button type="submit" name="signup_submit" class="btn btn-orange submit-btn">S'INSCRIRE</button>
-                        <div class="form-footer">
-                            Vous avez déjà un compte ? 
-                            <a href="#" onclick="showLogin(); return false;">connectez-vous</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-            <!-- Formulaire de connexion (caché par défaut) -->
-            <div id="loginForm" class="auth-form fadein-block" style="display: none;">
-                <div class="form-container">
-                    <h2 class="form-title">Connectez-vous</h2>
-                    <form method="post" action="<?= esc_url(wp_login_url()); ?>">
-                        <div class="form-group">
-                            <label for="log">Nom d'utilisateur</label>
-                            <input type="text" name="log" id="log" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Mot de passe</label>
-                            <input type="password" name="pwd" id="pwd" required>
-                        </div>
-                        <input type="hidden" name="redirect_to" value="<?= esc_url(home_url('/quiz')); ?>">
-                        <button type="submit" class="btn btn-orange submit-btn">CONNEXION</button>
-                        <div class="form-footer">
-                            Vous n'avez pas de compte ? 
-                            <a href="#" onclick="showSignup(); return false;">inscrivez-vous</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </main>
+        
     <?php endif; ?>
 </div>
 

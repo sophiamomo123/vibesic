@@ -87,11 +87,11 @@ get_header();
 }
 
 .quiz-start-btn {
-    font-size: 13px;
+    font-size: 14px;
     border: none;
     letter-spacing: 3px;
     font-weight: bold;
-    padding: 10px 40px;
+    padding: 10px 30px;
     gap: 10px;
     
 }

@@ -36,28 +36,7 @@ if (isset($_POST['login_submit'])) {
 get_header();
 ?>
 
-<div class="vibesic-frontpage">
-    <?php if (is_user_logged_in()) : ?>
-        <!-- Si l'utilisateur est déjà connecté -->
-        <main class="vibesic-main">
-            <div class="auth-form fadein-block">
-                <div class="form-container">
-                    <h2 class="form-title">Déjà connecté</h2>
-                    <div class="success-box">
-                        <p>✅ Vous êtes déjà connecté en tant que <strong><?= esc_html(wp_get_current_user()->display_name); ?></strong></p>
-                        <div class="action-buttons">
-                            <a href="<?= esc_url(home_url('/quiz')); ?>" class="btn btn-orange">ALLER AU QUIZ</a>
-                            <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="btn btn-outline">DÉCONNEXION</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        
     <?php else : ?>
-        <!-- Formulaires pour utilisateur non connecté -->
-        <main class="vibesic-main">
-            
             <!-- Formulaire de connexion -->
             <div id="loginForm" class="auth-form fadein-block" style="display: none;">
                 <div class="form-container">

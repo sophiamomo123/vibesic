@@ -14,12 +14,12 @@ get_header();
             
             <div class="page-content">
                 <section class="contact-section intro">
-                    <p>Vous avez une question concernant le site Vibesic, son fonctionnement ou l'un des services proposés ?</p>
+                    <p>Vous avez une question concernant le site vibesic, son fonctionnement ou l'un des services proposés ?</p>
                     <p>Notre équipe se tient à votre disposition pour vous accompagner.</p>
                 </section>
 
                 <section class="contact-section email-highlight">
-                    <p class="email-address"><a href="mailto:Vibesic@musique.com">Vibesic@musique.com</a></p>
+                    <p class="email-address"><a href="mailto:vibesic@musique.com">vibesic@musique.com</a></p>
                 </section>
 
                 <section class="contact-section">
@@ -31,12 +31,12 @@ get_header();
                 <section class="contact-section">
                     <h2>Données personnelles et confidentialité</h2>
                     <p>Pour toute question relative à la protection de vos données ou à l'exercice de vos droits (accès, suppression, modification…), contactez-nous également via :</p>
-                    <p class="email-address"><a href="mailto:Vibesic@musique.com">Vibesic@musique.com</a></p>
+                    <p class="email-address"><a href="mailto:vibesic@musique.com">vibesic@musique.com</a></p>
                 </section>
 
                 <section class="contact-section">
                     <h2>Feedback et améliorations</h2>
-                    <p>Vibesic évolue grâce aux retours de ses utilisateurs.</p>
+                    <p>vibesic évolue grâce aux retours de ses utilisateurs.</p>
                     <p>N'hésitez pas à partager vos idées ou proposer des améliorations pour enrichir l'expérience musicale.</p>
                 </section>
             </div>
@@ -47,8 +47,9 @@ get_header();
 <style>
 .legal-page-container {
     min-height: calc(100vh - 200px);
-    background-color: #f8f9fa;
+    background-color: #ffffffff;
     padding: 80px 20px 60px;
+    font-family: 'MusticaPro', sans-serif;
 }
 
 .legal-content {
@@ -60,7 +61,7 @@ get_header();
     background-color: white;
     padding: 60px;
     border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px solid #F6843F;
 }
 
 .page-title {

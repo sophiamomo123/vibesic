@@ -3,7 +3,7 @@
  * Template Name: Quiz Results
  */
 
-// Ne pas charger le header WordPress
+
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -211,6 +211,7 @@
             padding: 9px 45px;
             letter-spacing: 1px;
             font-family: 'Coolvetica', sans-serif;
+            gap: 10px;
         }
 
         .btn-orange {
@@ -760,7 +761,7 @@
     padding: 30px 40px;
     max-width: 900px;
     margin: 0 auto 0 auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #000000ff;
 }
 
 .instrument-pictos {
@@ -1363,22 +1364,23 @@ if (topKeys.length === 2 && maxCount === (total / 2)) {
 // Initialiser les instruments
 const instrumentMusics = {
     flute: [
-        'Relaxing Soothing Healing Solo Flute Music for Meditation',
+        'Sherry Finzer - Relaxing Soothing Healing Solo Flute Music for Meditation',
         '3 HOURS OF RELAXING FLUTE FOR STUDYING',
-        'Solo Flute Music for Healing Meditation',
-        'Musique relaxante de flûte en 30 minutes'
+        'Relaxing Native American Flute Music - Peaceful Meditation Music',
+        'Beautiful Flute Music - Calming Instrumental Music for Relaxation'
+        
     ],
     harpe: [
-        'Cascade de lumière',
-        'Étoiles filantes',
-        'Jardin secret',
-        'Pluie de pétales'
+        'Nadia Birkenstock  - Harp Solo "The Glow Within" ',
+        'Nadia Birkenstock - Celtic Harp Solo – A Trip to the Islands ',
+        'Camille Saint-Saëns  - Fantaisie for Solo Harp Op.95 ',
+        'Tchaikovsky - Waltz of the Flowers, The Nutcracker'
     ],
     ocarina: [
-        'Souffle du vent',
-        'Chemin tranquille',
-        'Nuages lents',
-        'Évasion bleue'
+        'David Ren - The Moon Represents My Heart (Ocarina Solo Cover)',
+        'The Legend of Zelda - Ocarina of Time Medley (Ocarina Cover)',
+        'Ocarina Cover - My Heart Will Go On (Titanic Theme)',
+        'Ocarina Cover - Spirited Away Medley'
     ],
     basse: [
         'Funky Bass Grooves',
@@ -1402,19 +1404,21 @@ const instrumentMusics = {
         'Bells of Happiness',
         'Sparkling Melodies',
         'Joyful Chimes',
-        'Dancing Bells'
+        'Glockenspiel Delight'
+
+
     ],
     saxophone: [
-        'Upbeat Sax Sessions',
-        'Jazz Saxophone Joy',
+        'Paul Desmond - Take Ten',
+        'Dave Koz ft. 57Kustik - You Make Me Smile',
         'Happy Sax Melodies',
-        'Saxophone Celebration'
+        'Smooth Jazz Saxophone'
     ],
     marracas: [
         'Latin Dance Rhythms',
         'Festive Percussion',
         'Tropical Vibes',
-        'Party Marracas'
+        'Maracas Fiesta'
     ],
     piano: [
         'Ludovico Einaudi - Nuvole Bianche',
@@ -1502,11 +1506,9 @@ function attachInstrumentClickEventsInContainer(mood, listsWrapperId) {
     pictos.forEach(function(picto) {
         picto.addEventListener('click', function(e) {
             e.stopPropagation();
-            
             const instrument = picto.getAttribute('data-instrument');
             const containerId = picto.getAttribute('data-container-id') || listsWrapperId;
             const listContainer = document.getElementById('list-' + instrument + '-' + containerId);
-            
             const wrapper = document.getElementById(containerId);
             if (wrapper) {
                 wrapper.querySelectorAll('.music-list-container').forEach(function(container) {
@@ -1515,18 +1517,67 @@ function attachInstrumentClickEventsInContainer(mood, listsWrapperId) {
                     }
                 });
             }
-            
             if (listContainer && (listContainer.style.display === 'none' || listContainer.style.display === '')) {
                 listContainer.style.display = 'block';
-                
                 const ul = listContainer.querySelector('.music-titles-list');
                 if (ul && ul.children.length === 0) {
                     const tracks = instrumentMusics[instrument] || [];
-                    ul.innerHTML = tracks.map(function(title) {
+                    // Mapping titre -> YouTube ID (identique à l'autre fonction)
+                    const musicYoutubeIds = {
+                        'Sherry Finzer - Relaxing Soothing Healing Solo Flute Music for Meditation': '2OEL4P1Rz04',
+    '3 HOURS OF RELAXING FLUTE FOR STUDYING': '1ZYbU82GVz4',
+    'Relaxing Native American Flute Music - Peaceful Meditation Music': 'QdW6IRsuXaQ',
+    'Beautiful Flute Music - Calming Instrumental Music for Relaxation': 'k1BneeJTDcU',
+   'Nadia Birkenstock - Harp Solo "The Glow Within"': 'QwZT7T-TXT0',
+  'Nadia Birkenstock - Celtic Harp Solo – A Trip to the Islands': 'QwZT7T-TXT0',
+   'Camille Saint-Saëns - Fantaisie for Solo Harp Op.95': 'QwZT7T-TXT0',
+   'Tchaikovsky - Waltz of the Flowers, The Nutcracker': 'QwZT7T-TXT0',
+    'David Ren - The Moon Represents My Heart (Ocarina Solo Cover)': '2Zt8va_6HRk',
+    'The Legend of Zelda - Ocarina of Time Medley (Ocarina Cover)': '2Zt8va_6HRk',
+    'Ocarina Cover - My Heart Will Go On (Titanic Theme)': '2Zt8va_6HRk',
+ 'Ocarina Cover - Spirited Away Medley': '2Zt8va_6HRk',
+    'Funky Bass Grooves': 'Qe500eIK1oA',
+    'Electric Bass Energy': 'Qe500eIK1oA',
+    'Slap Bass Power': 'Qe500eIK1oA',
+   'Bass Line Revolution': 'Qe500eIK1oA',
+    'African Drum Rhythms': 'QwZT7T-TXT0',
+    'Djembe Power Sessions': 'QwZT7T-TXT0',
+    'Tribal Energy Beats': 'QwZT7T-TXT0',
+    'Percussion Africaine Intense': 'QwZT7T-TXT0',
+    'Electric Guitar Riffs': '7wZQdD1iK3A',
+    'Rock Guitar Anthems': '7wZQdD1iK3A',
+    'Power Chords Collection': '7wZQdD1iK3A',
+    'Guitar Hero Sessions': '7wZQdD1iK3A',
+    'Bells of Happiness': 'QwZT7T-TXT0',
+   'Sparkling Melodies': 'QwZT7T-TXT0',
+    'Joyful Chimes': 'QwZT7T-TXT0',
+    'Glockenspiel Delight': 'QwZT7T-TXT0',
+    'Paul Desmond - Take Ten': 'QwZT7T-TXT0',
+   'Dave Koz ft. 57Kustik - You Make Me Smile': 'QwZT7T-TXT0',
+    'Happy Sax Melodies': 'QwZT7T-TXT0',
+   'Smooth Jazz Saxophone': 'QwZT7T-TXT0',
+    'Latin Dance Rhythms': 'QwZT7T-TXT0',
+   'Festive Percussion': 'QwZT7T-TXT0',
+    'Tropical Vibes': 'QwZT7T-TXT0',
+    'Maracas Fiesta': 'QwZT7T-TXT0',
+    'Ludovico Einaudi - Nuvole Bianche': 'kcihcYEOeic',
+    'Yiruma - River Flows in You': '7maJOI3QMu0',
+    'Nils Frahm - Ambre': 'F1L0nOup6z0',
+    'Ólafur Arnalds - saman': 'b1Z4PAZX9Bs',
+    'Max Richter - On the Nature of Daylight': 'rVN1B-tUpgs',
+    'Arvo Pärt - Fratres': 'pKdmGk6ciwA',
+    'Samuel Barber - Adagio for Strings': 'izQsgE0L450',
+  'Leo Rojas - Der einsame Hirte': 'u7pZ5A2kA4Y',
+   'Gheorghe Zamfir - Doina de Jale': 'QwZT7T-TXT0',
+   'Simion Stanciu - SYRINX': 'QwZT7T-TXT0'
+};
+
+                    ul.innerHTML = tracks.map(function(title, idx) {
                         const borderColor = emotionColors[mood] || '#e0e0e0';
                         const boxShadowColor = hexToRgb(emotionColors[mood] || '#e0e0e0');
-                        return '<li class="mood-' + mood + '" style="border: 2px solid ' + borderColor + '; box-shadow: 0 4px 12px rgba(' + boxShadowColor + ', 0.15);">' +
-                            '<span class="play-icon mood-' + mood + '">' +
+                        const ytId = musicYoutubeIds[title] || '';
+                        return '<li class="mood-' + mood + '" style="border: 2px solid ' + borderColor + '; box-shadow: 0 4px 12px rgba(' + boxShadowColor + ', 0.15); position:relative;">' +
+                            '<span class="play-icon mood-' + mood + '" data-playing="false" data-ytid="' + ytId + '" data-idx="' + idx + '">' +
                             '<svg width="28" height="28" viewBox="0 0 28 28">' +
                             '<circle cx="14" cy="14" r="13" stroke-width="2"/>' +
                             '<polygon points="12,9 20,14 12,19" fill="#fff"/>' +
@@ -1551,9 +1602,74 @@ function attachInstrumentClickEventsInContainer(mood, listsWrapperId) {
                             '</svg>' +
                             '</span>' +
                             '</div>' +
+                            '<div class="youtube-audio-player" style="display:none; position:absolute; left:-9999px; width:1px; height:1px;"></div>' +
                             '</li>';
                     }).join('');
-                    
+                    // Gestion du player audio YouTube
+                    let currentIcon = null;
+                    let currentPlayer = null;
+                    let currentContainer = null;
+                    let ytApiLoaded = false;
+                    function loadYouTubeAPI(callback) {
+                        if (ytApiLoaded) return callback();
+                        const tag = document.createElement('script');
+                        tag.src = "https://www.youtube.com/iframe_api";
+                        document.body.appendChild(tag);
+                        window.onYouTubeIframeAPIReady = function() {
+                            ytApiLoaded = true;
+                            callback();
+                        };
+                    }
+                    ul.querySelectorAll('.play-icon').forEach(function(icon) {
+                        icon.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const ytId = icon.getAttribute('data-ytid');
+                            const li = icon.closest('li');
+                            const playerContainer = li.querySelector('.youtube-audio-player');
+                            // Si déjà en lecture, on arrête
+                            if (icon.getAttribute('data-playing') === 'true') {
+                                if (currentPlayer) currentPlayer.pauseVideo();
+                                icon.setAttribute('data-playing', 'false');
+                                icon.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" stroke-width="2"/><polygon points="12,9 20,14 12,19" fill="#fff"/></svg>`;
+                                if (currentContainer) currentContainer.style.display = 'none';
+                                currentIcon = null;
+                                return;
+                            }
+                            // Arrêter l'autre icône si besoin
+                            if (currentPlayer) {
+                                currentPlayer.stopVideo();
+                                if (currentIcon) {
+                                    currentIcon.setAttribute('data-playing', 'false');
+                                    currentIcon.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" stroke-width="2"/><polygon points="12,9 20,14 12,19" fill="#fff"/></svg>`;
+                                }
+                                if (currentContainer) currentContainer.style.display = 'none';
+                            }
+                            // Mettre en lecture
+                            icon.setAttribute('data-playing', 'true');
+                            icon.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" stroke-width="2"/><rect x="10" y="9" width="3" height="10" fill="#fff"/><rect x="15" y="9" width="3" height="10" fill="#fff"/></svg>`;
+                            currentIcon = icon;
+                            currentContainer = playerContainer;
+                            loadYouTubeAPI(function() {
+                                playerContainer.style.display = 'block';
+                                playerContainer.innerHTML = `<div id=\"yt-audio-${ytId}\"></div>`;
+                                currentPlayer = new YT.Player(`yt-audio-${ytId}`, {
+                                    height: '1',
+                                    width: '1',
+                                    videoId: ytId,
+                                    events: {
+                                        'onReady': function(event) { event.target.playVideo(); },
+                                        'onStateChange': function(event) {
+                                            if (event.data === YT.PlayerState.ENDED) {
+                                                icon.setAttribute('data-playing', 'false');
+                                                icon.innerHTML = `<svg width=\"28\" height=\"28\" viewBox=\"0 0 28 28\"><circle cx=\"14\" cy=\"14\" r=\"13\" stroke-width=\"2\"/><polygon points=\"12,9 20,14 12,19\" fill=\"#fff\"/></svg>`;
+                                                playerContainer.style.display = 'none';
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    });
                     ul.querySelectorAll('.share-icon').forEach(function(icon) {
                         icon.addEventListener('click', function(e) {
                             e.stopPropagation();
@@ -1561,7 +1677,6 @@ function attachInstrumentClickEventsInContainer(mood, listsWrapperId) {
                             alert('Partager : ' + title);
                         });
                     });
-                    
                     ul.querySelectorAll('.save-icon').forEach(function(icon) {
                         icon.addEventListener('click', function(e) {
                             e.stopPropagation();
@@ -1630,11 +1745,73 @@ function attachInstrumentClickEvents(mood) {
                 const ul = listContainer.querySelector('.music-titles-list');
                 if (ul.children.length === 0) {
                     const tracks = instrumentMusics[instrument] || [];
-                    ul.innerHTML = tracks.map(function(title) {
+                    // Mapping titre -> YouTube ID (exemple, à compléter)
+                    const musicYoutubeIds = {
+                        // Flute
+                        'Relaxing Soothing Healing Solo Flute Music for Meditation': '2OEL4P1Rz04',
+                        '3 HOURS OF RELAXING FLUTE FOR STUDYING': '1ZYbU82GVz4',
+                        'Solo Flute Music for Healing Meditation': 'QdW6IRsuXaQ',
+                        'Musique relaxante de flûte en 30 minutes': 'k1BneeJTDcU',
+                        // Harpe
+                        'Cascade de lumière': 'QwZT7T-TXT0',
+                        'Étoiles filantes': 'QwZT7T-TXT0',
+                        'Jardin secret': 'QwZT7T-TXT0',
+                        'Pluie de pétales': 'QwZT7T-TXT0',
+                        // Ocarina
+                        'Souffle du vent': '2Zt8va_6HRk',
+                        'Chemin tranquille': '2Zt8va_6HRk',
+                        'Nuages lents': '2Zt8va_6HRk',
+                        'Évasion bleue': '2Zt8va_6HRk',
+                        // Basse
+                        'Funky Bass Grooves': 'Qe500eIK1oA',
+                        'Electric Bass Energy': 'Qe500eIK1oA',
+                        'Slap Bass Power': 'Qe500eIK1oA',
+                        'Bass Line Revolution': 'Qe500eIK1oA',
+                        // Djembe
+                        'African Drum Rhythms': 'QwZT7T-TXT0',
+                        'Djembe Power Sessions': 'QwZT7T-TXT0',
+                        'Tribal Energy Beats': 'QwZT7T-TXT0',
+                        'Percussion Africaine Intense': 'QwZT7T-TXT0',
+                        // Guitare
+                        'Electric Guitar Riffs': '7wZQdD1iK3A',
+                        'Rock Guitar Anthems': '7wZQdD1iK3A',
+                        'Power Chords Collection': '7wZQdD1iK3A',
+                        'Guitar Hero Sessions': '7wZQdD1iK3A',
+                        // Glockenspiel
+                        'Bells of Happiness': 'QwZT7T-TXT0',
+                        'Sparkling Melodies': 'QwZT7T-TXT0',
+                        'Joyful Chimes': 'QwZT7T-TXT0',
+                        'Dancing Bells': 'QwZT7T-TXT0',
+                        // Saxophone
+                        'Upbeat Sax Sessions': 'QwZT7T-TXT0',
+                        'Jazz Saxophone Joy': 'QwZT7T-TXT0',
+                        'Happy Sax Melodies': 'QwZT7T-TXT0',
+                        'Saxophone Celebration': 'QwZT7T-TXT0',
+                        // Marracas
+                        'Latin Dance Rhythms': 'QwZT7T-TXT0',
+                        'Festive Percussion': 'QwZT7T-TXT0',
+                        'Tropical Vibes': 'QwZT7T-TXT0',
+                        'Party Marracas': 'QwZT7T-TXT0',
+                        // Piano
+                        'Ludovico Einaudi - Nuvole Bianche': 'kcihcYEOeic',
+                        'Yiruma - River Flows in You': '7maJOI3QMu0',
+                        'Nils Frahm - Ambre': 'F1L0nOup6z0',
+                        'Ólafur Arnalds - saman': 'b1Z4PAZX9Bs',
+                        // Violon
+                        'Max Richter - On the Nature of Daylight': 'rVN1B-tUpgs',
+                        'SArvo Pärt - Fratres': 'pKdmGk6ciwA',
+                        'Samuel Barber - Adagio for Strings': 'izQsgE0L450',
+                        // Flûte de Pan
+                        'Leo Rojas - Der einsame Hirte': 'u7pZ5A2kA4Y',
+                        'Gheorghe Zamfir - Doina de Jale ': 'QwZT7T-TXT0',
+                        'Simion Stanciu - SYRINX': 'QwZT7T-TXT0'
+                    };
+                    ul.innerHTML = tracks.map(function(title, idx) {
                         const borderColor = emotionColors[mood] || '#e0e0e0';
                         const boxShadowColor = hexToRgb(emotionColors[mood] || '#e0e0e0');
-                        return '<li class="mood-' + mood + '" style="border: 2px solid ' + borderColor + '; box-shadow: 0 4px 12px rgba(' + boxShadowColor + ', 0.15);">' +
-                            '<span class="play-icon mood-' + mood + '">' +
+                        const ytId = musicYoutubeIds[title] || '';
+                        return '<li class="mood-' + mood + '" style="border: 2px solid ' + borderColor + '; box-shadow: 0 4px 12px rgba(' + boxShadowColor + ', 0.15); position:relative;">' +
+                            '<span class="play-icon mood-' + mood + '" data-playing="false" data-ytid="' + ytId + '" data-idx="' + idx + '">' +
                             '<svg width="28" height="28" viewBox="0 0 28 28">' +
                             '<circle cx="14" cy="14" r="13" stroke-width="2"/>' +
                             '<polygon points="12,9 20,14 12,19" fill="#fff"/>' +
@@ -1659,8 +1836,75 @@ function attachInstrumentClickEvents(mood) {
                             '</svg>' +
                             '</span>' +
                             '</div>' +
+                            '<div class="youtube-audio-player" style="display:none; position:absolute; left:-9999px; width:1px; height:1px;"></div>' +
                             '</li>';
                     }).join('');
+                    
+                    // Gestion du player audio YouTube
+                    let currentIcon = null;
+                    let currentPlayer = null;
+                    let currentContainer = null;
+                    let ytApiLoaded = false;
+                    function loadYouTubeAPI(callback) {
+                        if (ytApiLoaded) return callback();
+                        const tag = document.createElement('script');
+                        tag.src = "https://www.youtube.com/iframe_api";
+                        document.body.appendChild(tag);
+                        window.onYouTubeIframeAPIReady = function() {
+                            ytApiLoaded = true;
+                            callback();
+                        };
+                    }
+                    ul.querySelectorAll('.play-icon').forEach(function(icon) {
+                        icon.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const ytId = icon.getAttribute('data-ytid');
+                            const li = icon.closest('li');
+                            const playerContainer = li.querySelector('.youtube-audio-player');
+                            // Si déjà en lecture, on arrête
+                            if (icon.getAttribute('data-playing') === 'true') {
+                                if (currentPlayer) currentPlayer.pauseVideo();
+                                icon.setAttribute('data-playing', 'false');
+                                icon.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" stroke-width="2"/><polygon points="12,9 20,14 12,19" fill="#fff"/></svg>`;
+                                if (currentContainer) currentContainer.style.display = 'none';
+                                currentIcon = null;
+                                return;
+                            }
+                            // Arrêter l'autre icône si besoin
+                            if (currentPlayer) {
+                                currentPlayer.stopVideo();
+                                if (currentIcon) {
+                                    currentIcon.setAttribute('data-playing', 'false');
+                                    currentIcon.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" stroke-width="2"/><polygon points="12,9 20,14 12,19" fill="#fff"/></svg>`;
+                                }
+                                if (currentContainer) currentContainer.style.display = 'none';
+                            }
+                            // Mettre en lecture
+                            icon.setAttribute('data-playing', 'true');
+                            icon.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" stroke-width="2"/><rect x="10" y="9" width="3" height="10" fill="#fff"/><rect x="15" y="9" width="3" height="10" fill="#fff"/></svg>`;
+                            currentIcon = icon;
+                            currentContainer = playerContainer;
+                            loadYouTubeAPI(function() {
+                                playerContainer.style.display = 'block';
+                                playerContainer.innerHTML = `<div id=\"yt-audio-${ytId}\"></div>`;
+                                currentPlayer = new YT.Player(`yt-audio-${ytId}`, {
+                                    height: '1',
+                                    width: '1',
+                                    videoId: ytId,
+                                    events: {
+                                        'onReady': function(event) { event.target.playVideo(); },
+                                        'onStateChange': function(event) {
+                                            if (event.data === YT.PlayerState.ENDED) {
+                                                icon.setAttribute('data-playing', 'false');
+                                                icon.innerHTML = `<svg width=\"28\" height=\"28\" viewBox=\"0 0 28 28\"><circle cx=\"14\" cy=\"14\" r=\"13\" stroke-width=\"2\"/><polygon points=\"12,9 20,14 12,19\" fill=\"#fff\"/></svg>`;
+                                                playerContainer.style.display = 'none';
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    });
                     
                     ul.querySelectorAll('.share-icon').forEach(function(icon) {
                         icon.addEventListener('click', function(e) {

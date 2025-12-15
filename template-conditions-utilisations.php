@@ -1,6 +1,7 @@
 <?php
 /**
- * Template Name: Conditions d'utilisation
+ * Template Name: Conditions Utilisations
+ * Description: Page des conditions d'utilisations
  */
 
 get_header();
@@ -102,7 +103,7 @@ get_header();
                 <section class="legal-section">
                     <h2>10. Contact</h2>
                     <p>Pour toute question concernant ces conditions d'utilisation ou le fonctionnement du service :<br>
-                    <a href="mailto:Vibesic@musique.com">Vibesic@musique.com</a></p>
+                    <a href="mailto:vibesic@musique.com">vibesic@musique.com</a></p>
                 </section>
             </div>
         </div>
@@ -112,8 +113,9 @@ get_header();
 <style>
 .legal-page-container {
     min-height: calc(100vh - 200px);
-    background-color: #f8f9fa;
+    background-color: #ffffffff;
     padding: 80px 20px 60px;
+    font-family: 'MusticaPro', sans-serif;
 }
 
 .legal-content {
@@ -125,7 +127,7 @@ get_header();
     background-color: white;
     padding: 60px;
     border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px solid #F6843F;
 }
 
 .page-title {
