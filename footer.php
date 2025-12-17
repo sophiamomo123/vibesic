@@ -3,7 +3,7 @@
 <footer class="vibesic-footer">
     <div class="footer-content">
         <a href="<?= esc_url(home_url('')); ?>" class="vibesic-logo">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-vibesic.PNG" alt="Vibesic" class="logo-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.webp" alt="Vibesic" class="logo-image">
         </a>
     </div>
         
@@ -12,6 +12,7 @@
     <a href="/contact">Contacts</a>
     <a href="/politique-de-vie-privee">Politique de vie privée</a>
     <a href="/conditions-d'utilisations">Conditions d'utilisations</a>
+       
 </div>
 
 <div class="footer-divider"></div>
@@ -39,7 +40,7 @@
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Youtube.png" alt="YouTube">
     </a>
     <a href="#" class="social-icon">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Tiktok.png" alt="TikTok">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/TikTok.png" alt="TikTok">
     </a>
 </div>
         
@@ -68,10 +69,11 @@
 }
 
 .vibesic-logo {
-    font-size: 28px;
+    font-size: 34px;
     font-weight: bold;
     margin-bottom: 40px;
     margin-left: 0;  
+    height: 22px;
 }
 
 .footer-columns {

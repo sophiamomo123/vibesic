@@ -10,10 +10,17 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez vos résultats du quiz et explorez des musiques adaptées à votre humeur du jour sur Vibesic.">
+    <meta name="robots" content="index, follow">
     <title><?php wp_title(); ?></title>
+        <!-- Bootstrap 5 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <?php wp_head(); ?>
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <body <?php body_class(); ?>>
+
 
 <div class="results-page">
     <!-- Boutons S'INSCRIRE et CONNEXION en haut à droite -->
@@ -35,7 +42,7 @@
             
             <!-- Logo sous le burger (visible quand ouvert) -->
             <a href="<?= esc_url(home_url('/')); ?>" class="sidebar-logo-inside">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-vibesic.PNG" alt="Vibesic" class="logo-image">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.webp" alt="Vibesic" class="logo-image">
             </a>
 
             <nav class="sidebar-nav">
@@ -45,7 +52,7 @@
                     </span>
                     <span class="nav-text">ACCUEIL</span>
                 </a>
-                <a href="<?= esc_url(home_url('/quiz-results')); ?>" class="nav-item">
+                <a href="<?php echo esc_url(home_url('/bibliotheque')); ?>" class="nav-item">
                     <span class="nav-icon">
                         <img src="<?= get_template_directory_uri(); ?>/assets/images/Bibliothèque.png" alt="Bibliothèque">
                     </span>
@@ -53,7 +60,7 @@
                 </a>
                 <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="nav-item logout">
                     <span class="nav-icon">
-                        <img src="<?= get_template_directory_uri(); ?>/assets/images/Déconnexion.png" alt="Déconnexion">
+                        <img src="<?= get_template_directory_uri(); ?>/assets/images/Deconnexion.png" alt="Déconnexion">
                     </span>
                     <span class="nav-text">DÉCONNEXION</span>
                 </a>
@@ -63,7 +70,7 @@
     
     <!-- Logo externe (visible quand sidebar fermée) -->
     <a href="<?= esc_url(home_url('/')); ?>" class="sidebar-logo-outside">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-vibesic.PNG" alt="Vibesic" class="logo-image">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.webp" alt="Vibesic" class="logo-image">
     </a>
 
     <!-- Main Content -->
@@ -151,7 +158,7 @@
 <footer class="vibesic-footer">
     <div class="footer-content">
         <a href="<?= esc_url(home_url('')); ?>" class="vibesic-logo">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-vibesic.PNG" alt="Vibesic" class="logo-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.webp" alt="Vibesic" class="logo-image">
         </a>
     </div>
         
@@ -196,32 +203,33 @@
         </div>
     </div>
 <style>
-/* Boutons d'authentification en haut à droite */
 
-.header-btn {
+
+ .header-btn {
             padding: 10px 25px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.3s ease;
             display: inline-block;
             cursor: pointer;
             border: 2px solid transparent;
             padding: 9px 45px;
-            letter-spacing: 1px;
-            font-family: 'Coolvetica', sans-serif;
-            gap: 10px;
+            margin-top: -10px;
+            
         }
 
-        .btn-orange {
+       .btn-orange {
             background-color: #F6843F;
-            color: white;
+            color: black;
             border: 2px solid #F6843F;
             gap: 10px;
             padding: 9px 45px;
             border-radius: 25px;
             cursor: pointer;
+            font-family: 'Coolvetica', sans-serif;
+            letter-spacing: 2px;
         }
 
         .btn-orange:hover {
@@ -390,18 +398,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 20px;
+    margin-bottom: 15px;
+    border-bottom: 0.5px solid #000000ff;
+
+    
     opacity: 1;
     transition: opacity 0.3s ease, max-height 0.3s ease;
     max-height: 100px;
-    height: 60px;
+    height: 0px;
 }
 
 .sidebar-logo-inside img {
     max-width: 130px;
-    height: 60px;
+    height: 22px;
 }
 
 /* Cacher le logo inside quand sidebar fermée */
@@ -424,12 +434,12 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease, left 0.3s ease;
-    height: 60px;
+    height: 22px;
 }
 
 .sidebar-logo-outside img {
     max-width: 120px;
-    height: 60px;
+    height: 22px;
 }
 
 /* Afficher le logo outside quand sidebar fermée */
@@ -542,10 +552,7 @@
 }
 
 .chart-legend-container {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    flex-direction: row-reverse;
+    display: block;
     position: relative;
     border-radius: 16px;
     margin-top: 10px;
@@ -606,23 +613,21 @@
 
 .chart-inner {
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 35px 17px;
+    padding: 20px 8px 8px 8px;
     border-radius: 16px;
     box-shadow: 0 12px 48px rgba(0,0,0,0.18);
-    display: flex;
-    gap: 24px;
-    align-items: center;
+    display: block;
     width: 100%;
     position: relative;
     z-index: 2;
 }
 
 .chart-container {
-    flex: 0 0 300px;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-left: 40px;
+    margin: 0 auto 12px auto;
 }
 
 #emotionChart {
@@ -632,14 +637,59 @@
 }
 
 .legend {
-    flex: 1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px 24px;
+    grid-template-columns: 1fr;
+    gap: 10px;
     align-items: start;
-    justify-items: start;
-    max-width: 420px;
-    margin: 0 auto;
+    justify-items: center;
+    max-width: 320px;
+    margin: 18px auto 0 auto;
+}
+@media (min-width: 768px) {
+    .chart-legend-container {
+        display: block;
+    }
+    .chart-inner {
+        display: block;
+        padding: 28px 18px 12px 18px;
+    }
+    .chart-container {
+        margin: 0 auto 18px auto;
+    }
+    .legend {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 24px;
+        max-width: 420px;
+    }
+}
+@media (min-width: 1024px) {
+    .chart-legend-container {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    .chart-inner {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        padding: 35px 17px;
+    }
+    .chart-container {
+        flex: 0 0 300px;
+        justify-content: flex-end;
+        align-items: center;
+        margin-left: 40px;
+        margin-bottom: 0;
+    }
+    .legend {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px 24px;
+        align-items: start;
+        justify-items: start;
+        max-width: 420px;
+        margin: 0 auto;
+    }
 }
 
 .legend-title {
@@ -692,23 +742,24 @@
     color: #F6843F;
 }
 
+/* MOBILE FIRST - PLAYLIST SECTION */
 .music-section {
     background-color: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 18px 6px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     margin-bottom: 0;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 .section-title {
-    font-size: 28px;
+    font-size: 20px;
     color: #000;
-    margin-bottom: 25px;
+    margin-bottom: 16px;
     font-family: 'Coolvetica', Arial, sans-serif;
     font-weight: bold;
     text-align: center;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
 }
 
 .tie-results {
@@ -741,7 +792,7 @@
 
 .mood-title-block {
     font-size: 36px;
-    color: #000;
+    color: #000000ff;
     margin-bottom: 20px;
     font-family: 'Coolvetica', sans-serif;
     font-weight: bold;
@@ -749,26 +800,28 @@
     letter-spacing: 6px;
     text-transform: uppercase;
     padding: 20px;
-    background: #f8f9fa;
+    background: #ffffffff;
     border-radius: 15px;
+   
 }
 
 /* Styles pour les instruments */
 .instruments-container {
-    background: #ffffff;
-    border: 2px solid #e0e0e0;
-    border-radius: 30px;
-    padding: 30px 40px;
-    max-width: 900px;
-    margin: 0 auto 0 auto;
-    border: 1px solid #000000ff;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 18px;
+    padding: 12px 6px;
+    max-width: 100vw;
+    margin: 0 auto;
 }
 
 .instrument-pictos {
     display: flex;
-    gap: 32px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
+    overflow-x: auto;
+    padding-bottom: 6px;
 }
 
 .instrument-picto {
@@ -781,8 +834,8 @@
 }
 
 .instrument-picto img {
-    width: 72px;
-    height: 72px;
+    width: 48px;
+    height: 48px;
     transition: filter 0.2s, transform 0.2s;
 }
 
@@ -834,11 +887,11 @@
 
 /* Conteneur des listes de musiques */
 .music-lists-wrapper {
-    margin-top: 30px;
+    margin-top: 16px;
 }
 
 .music-list-container {
-    max-width: 700px;
+    max-width: 100vw;
     margin: 0 auto;
 }
 
@@ -848,21 +901,81 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
 .music-titles-list li {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 16px 18px;
+    gap: 8px;
+    padding: 10px 8px;
     font-family: 'Coolvetica', sans-serif;
-    font-size: 1.05em;
-    background: #ffffff;
-    border: 2px solid #e0e0e0;
-    border-radius: 20px;
+    font-size: 1em;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+@media (max-width: 480px) {
+    .logo-image {
+        height: 22px;
+    }
+
+    .header-btn {
+        padding: 6px 12px; 
+        font-size: 11px; 
+        border-radius: 14px; 
+    }
+
+    .header-nav {
+        flex-direction: row !important;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+/* TABLET */
+@media (min-width: 768px) {
+    .music-section {
+        padding: 32px 18px;
+        border-radius: 18px;
+        margin-top: 40px;
+    }
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 22px;
+        letter-spacing: 3px;
+    }
+    .instruments-container {
+        padding: 20px 18px;
+        border-radius: 24px;
+        max-width: 700px;
+    }
+    .instrument-pictos {
+        gap: 24px;
+        padding-bottom: 0;
+        justify-content: center;
+    }
+    .instrument-picto img {
+        width: 64px;
+        height: 64px;
+    }
+    .music-lists-wrapper {
+        margin-top: 24px;
+    }
+    .music-list-container {
+        max-width: 600px;
+    }
+    .music-titles-list {
+        gap: 14px;
+    }
+    .music-titles-list li {
+        gap: 14px;
+        padding: 14px 16px;
+        font-size: 1.08em;
+        border-radius: 16px;
+    }
 }
 
 /* Hover dynamique selon l'humeur */
@@ -889,7 +1002,22 @@
     box-shadow: 0 4px 12px rgba(38, 169, 216, 0.15);
     transform: translateY(-2px);
 }
+/* Couleur pour les titres d'humeur dans les sections 50-50 */
+.tie-music-section[data-mood="dynamisme"] .mood-title-block {
+    color: #C84545;
+}
 
+.tie-music-section[data-mood="calme"] .mood-title-block {
+    color: #84B82A;
+}
+
+.tie-music-section[data-mood="joie"] .mood-title-block {
+    color: #FCE977;
+}
+
+.tie-music-section[data-mood="tristesse"] .mood-title-block {
+    color: #26A9D8;
+}
 .play-icon {
     flex-shrink: 0;
     cursor: pointer;
@@ -950,15 +1078,23 @@
     height: 100%;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+@media (min-width: 1024px) {
     .top-auth-buttons {
         top: 20px;
         right: 20px;
+        gap: 12px;
+
     }
     
     .tie-music-sections {
         grid-template-columns: 1fr;
+
+    }
+
+    .result-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
     }
 }
 
@@ -1006,35 +1142,18 @@
         padding: 10px 20px;
         font-size: 12px;
     }
+   .tie-music-sections {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .tie-music-section {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
-@media (max-width: 480px) {
-    .sidebar-logo-outside {
-        left: 85px;
-        top: 20px;
-    }
-    
-    .sidebar-logo-outside img {
-        max-width: 70px;
-    }
-    
-    .top-auth-buttons {
-        flex-direction: column;
-        gap: 8px;
-        top: 10px;
-        right: 10px;
-    }
-    
-    .auth-btn {
-        padding: 8px 16px;
-        font-size: 11px;
-    }
-    
-    .results-main {
-        margin-left: 70px;
-        padding: 20px 15px;
-    }
-}
+
 .vibesic-footer {
     position: relative;
     z-index: 200; /* placer le footer au-dessus des éléments fixes comme la sidebar */
@@ -1143,7 +1262,7 @@
     font-weight: 500;
 }
 
-/* Responsive */
+
 @media (max-width: 1024px) {
     .footer-columns {
         flex-wrap: wrap;
@@ -1152,6 +1271,17 @@
     .footer-divider {
         display: none;
     }
+
+    .music-icon {
+        max-width: 120px;
+        width: 30vw;
+
+    }
+
+    .legend {
+        max-width: 100%;
+        grid-template-columns: repeat(1, 1fr);
+
 }
 
 @media (max-width: 768px) {
@@ -1169,10 +1299,16 @@
         width: 100%;
     }
 }
+.legend {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px 12px;
+}
 </style>
 
 <?php wp_footer(); ?>
 </body>
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6DQD021OlistMZC1ZlUPq8cxEN4l4p3Gm5t9UJ0Z" crossorigin="anonymous"></script>
 </html>
     
 
@@ -1183,6 +1319,32 @@
 <!-- Insérez tout votre JavaScript ici (identique à votre code original) -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // --- BIBLIOTHÈQUE SIDEBAR ---
+    function renderSidebarLibrary() {
+        const played = JSON.parse(localStorage.getItem('vibesic_recently_played') || '[]');
+        const saved = JSON.parse(localStorage.getItem('vibesic_recently_saved') || '[]');
+        const playedList = document.getElementById('library-recently-played');
+        const savedList = document.getElementById('library-recently-saved');
+        if (playedList) playedList.innerHTML = played.length ? played.map(t => `<li style='padding:6px 0;border-bottom:1px solid #eee;'>${t}</li>`).join('') : '<li style="color:#aaa;">Aucun titre</li>';
+        if (savedList) savedList.innerHTML = saved.length ? saved.map(t => `<li style='padding:6px 0;border-bottom:1px solid #eee;'>${t}</li>`).join('') : '<li style="color:#aaa;">Aucun titre</li>';
+    }
+    // Ouvre le panneau bibliothèque
+    const biblioMenu = document.querySelector('.sidebar-nav .nav-item[href*="bibliotheque"], .sidebar-nav .nav-item[href*="quiz-results"]');
+    if (biblioMenu) {
+        biblioMenu.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('library-panel').style.display = 'block';
+            renderSidebarLibrary();
+        });
+    }
+    // Ferme le panneau
+    const closeBtn = document.getElementById('close-library-panel');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            document.getElementById('library-panel').style.display = 'none';
+        });
+    }
+        renderSidebarLibrary();
     const toggle = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
     if (!toggle || !sidebar) return;
@@ -1942,7 +2104,7 @@ if (topKeys.length === 2 && maxCount === (total / 2)) {
         
         tieContainer.innerHTML = `
             <div class="tie-music-sections">
-                <div class="tie-music-section">
+            <div class="tie-music-section" data-mood="${moodA}">
                     <h2 class="mood-title-block">${emotionNames[moodA]}</h2>
                     <h2 class="section-title">Explorez par instruments</h2>
                     <div class="instruments-container" id="instruments-container-${moodA}">
@@ -1951,7 +2113,7 @@ if (topKeys.length === 2 && maxCount === (total / 2)) {
                     <div class="music-lists-wrapper" id="music-lists-wrapper-${moodA}"></div>
                 </div>
                 
-                <div class="tie-music-section">
+                <div class="tie-music-section" data-mood="${moodB}">
                     <h2 class="mood-title-block">${emotionNames[moodB]}</h2>
                     <h2 class="section-title">Explorez par instruments</h2>
                     <div class="instruments-container" id="instruments-container-${moodB}">

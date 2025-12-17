@@ -4,13 +4,16 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Vibesic, plateforme de musique.">
+    <meta name="robots" content="index, follow">
     <title><?php wp_title('|', true, 'right'); ?> <?php bloginfo('name'); ?></title>
     <link rel="stylesheet" href="https://use.typekit.net/ntg0fjv.css">
     <link rel="stylesheet" href="MusticaPro.otf">
-    
+        <!-- Bootstrap 5 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
     <?php wp_head(); ?>
     
-
 
     <style>
 
@@ -47,12 +50,12 @@
             align-items: center;
             text-decoration: none;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 24px;
     
 }
 
         .logo-image {
-           height: 60px;
+           height: 22px;
            width: auto;
            display: block;
     
@@ -83,11 +86,12 @@
             border: 2px solid transparent;
             padding: 9px 45px;
             margin-top: -10px;
+            
         }
 
         .btn-orange {
             background-color: #F6843F;
-            color: white;
+            color: black;
             border: 2px solid #F6843F;
             gap: 10px;
             padding: 9px 45px;
@@ -127,60 +131,26 @@
             color: #F6843F;
         }
 
-        /* Menu hamburger pour mobile */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #F6843F;
-            cursor: pointer;
-        }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .vibesic-header {
-                padding: 15px 20px;
-            }
 
-            .mobile-menu-toggle {
-                display: block;
-            }
+@media (max-width: 480px) {
+    .logo-image {
+        height: 26px;
+    }
 
-            .header-nav {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                background-color: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-                transition: right 0.3s ease;
-                width: 250px;
-                height: calc(100vh - 70px);
-            }
+    .header-btn {
+        padding: 6px 12px; 
+        font-size: 11px; 
+        border-radius: 14px; 
+    }
 
-            .header-nav.active {
-                right: 0;
-            }
-
-            .header-btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .user-welcome {
-                text-align: center;
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .vibesic-logo {
-                font-size: 22px;
-            }
-        }
+    .header-nav {
+        flex-direction: row !important;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
     </style>
 </head>
 
@@ -189,12 +159,9 @@
 
     <header class="vibesic-header">
         <a href="<?= esc_url(home_url('')); ?>" class="vibesic-logo">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-vibesic.PNG" alt="Vibesic" class="logo-image">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.webp" alt="Vibesic" class="logo-image">
 </a>
         
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
-            ☰
-        </button>
         
         <nav class="header-nav" id="headerNav">
             <?php if (is_user_logged_in()) : ?>
@@ -203,8 +170,9 @@
                 </span>
                 <a href="<?= esc_url(wp_logout_url(home_url())); ?>" class="header-btn btn-orange">DÉCONNEXION</a>
             <?php else : ?>
+                
                 <a href="<?= esc_url(home_url('/template-register')); ?>" class="header-btn btn-orange">S'INSCRIRE</a>
-                 <a href="#" class="header-btn btn-orange" onclick="showLogin(); return false;">CONNEXION</a>
+                <a href="#" class="header-btn btn-orange" onclick="showLogin(); return false;">CONNEXION</a>
             <?php endif; ?>
         </nav>
     </header>
@@ -231,3 +199,5 @@
             }
         });
     </script>
+        <!-- Bootstrap 5 JS Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6DQD021OlistMZC1ZlUPq8cxEN4l4p3Gm5t9UJ0Z" crossorigin="anonymous"></script>

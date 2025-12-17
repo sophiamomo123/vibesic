@@ -270,10 +270,13 @@ get_header();
 
 .btn-orange {
     background-color: #F6843F;
-    color: white;
-    border: none;
-    padding: 9px 45px;
-    gap: 10px;
+            color: black;
+            border: 2px solid #F6843F;
+            gap: 10px;
+            padding: 9px 45px;
+            border-radius: 25px;
+            cursor: pointer;
+   
 }
 
 .btn-orange:hover {
@@ -423,6 +426,24 @@ get_header();
 @media (max-width: 480px) {
     .vibesic-frontpage {
         padding: 30px 15px;
+    }
+}
+@media (max-width: 480px) {
+    .logo-image {
+        height: 22px;
+    }
+
+    .header-btn {
+        padding: 6px 12px; 
+        font-size: 11px; 
+        border-radius: 14px; 
+    }
+
+    .header-nav {
+        flex-direction: row !important;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
     }
 }
 </style>

@@ -4,6 +4,15 @@
  * Theme Functions
  */
 
+// Génère dynamiquement les URLs des pages légales pour le footer
+function vibesic_get_footer_link($slug, $default = '#') {
+    $page = get_page_by_path($slug);
+    if ($page) {
+        return esc_url(get_permalink($page->ID));
+    }
+    return $default;
+}
+
 // Theme setup
 function theme_setup()
 {
@@ -286,6 +295,17 @@ function custom_login_background() {
     <?php
 }
 add_action('login_enqueue_scripts', 'custom_login_background');
+
+
+function redirect_to_bibliotheque_template() {
+    if (is_page('bibliotheque')) {
+        // Forcer le chargement du template Bibliothèque
+        include(locate_template('page-bibliotheque.php'));
+        exit;
+    }
+}
+add_action('template_redirect', 'redirect_to_bibliotheque_template');
+
 
 
 

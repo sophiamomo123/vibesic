@@ -1,36 +1,8 @@
-/* Objectifs cards côte à côte et fade-in */
-.objectifs-cards {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 2rem auto 0 auto;
-    flex-wrap: wrap;
-    max-width: 800px;
-}
-.objectif-card {
-    flex: 1 1 300px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    padding: 2rem 1.5rem;
-    min-width: 220px;
-    max-width: 350px;
-    margin: 0 10px;
-    opacity: 1;
-    transition: box-shadow 0.3s;
-}
-.objectif-card:hover {
-    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
-}
-.fadein-block {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1.2s cubic-bezier(.4,0,.2,1), transform 1.2s cubic-bezier(.4,0,.2,1);
-}
-.fadein-block.fadein-visible {
-    opacity: 1;
-    transform: translateY(0);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 /* Fade-in pour le titre principal de la home */
 .fadein-title {
@@ -42,106 +14,12 @@
     opacity: 1;
     transform: translateY(0);
 }
-/* Boutons uniformes sur tout le site */
-.vibesic-btn, button, .submit-btn, .btn, .logout-btn, .login-btn, .register-btn {
-    min-width: 180px;
-    max-width: 220px;
-    width: 200px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    box-sizing: border-box;
-    display: inline-block;
-    text-align: center;
-}
 
-/* Pour les boutons dans les formulaires qui étaient en width: 100% */
-.form-container .submit-btn {
-    width: 200px;
-    margin: 0 auto;
-    display: block;
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.6;
-}
-
-/* Login & Register Forms */
-.login-container,
-.register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh;
-    padding: 2rem;
-}
-
-.login-form-wrapper,
-.register-form-wrapper {
-    width: 100%;
-    max-width: 400px;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.login-form-wrapper h1,
-.register-form-wrapper h1 {
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"],
-.form-group input[type="tel"] {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.form-group input[type="checkbox"] {
-    margin-right: 0.5rem;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 0.75rem;
-    background: #0073aa;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.submit-btn:hover {
-    background: #005a87;
-}
 
 .error-message {
     background: #f8d7da;
-    color: #721c24;
+    color: #52181e;
     padding: 1rem;
     border-radius: 4px;
     margin-bottom: 1rem;
@@ -163,7 +41,7 @@ body {
 
 .register-link a,
 .login-link a {
-    color: #0073aa;
+    color: #066b8d;
     text-decoration: none;
 }
 
@@ -224,11 +102,14 @@ body {
     transition: background 0.3s;
 }
 
+
 .logout-btn:hover,
 .login-btn:hover,
 .register-btn:hover {
     background: #005a87;
 }
+
+
 
 .register-btn {
     background: #28a745;
@@ -237,10 +118,8 @@ body {
 .register-btn:hover {
     background: #218838;
 }
-@font-face {
-    font-family: 'Coolvetica';
-    src: url('assets/fonts/Coolvetica.otf') format('opentype');
-}
+
+
 h1  {
     font-family: 'Coolvetica', sans-serif;
 }

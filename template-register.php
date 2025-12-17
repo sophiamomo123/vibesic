@@ -1,4 +1,3 @@
-/
 <?php
 /**
  * Template Name: Register Template
@@ -6,7 +5,6 @@
  */
 
 // Traitement de l'inscription
-$signup_error = null;
 if (isset($_POST['signup_submit'])) {
     $username = sanitize_user($_POST['username']);
     $email = sanitize_email($_POST['email']);
@@ -40,80 +38,81 @@ if (isset($_POST['signup_submit'])) {
     }
 }
 
-
 get_header();
 ?>
 
-    <?php else : ?>
+<div class="vibesic-frontpage">
+    <main class="vibesic-main">
+        <!-- Personnage gauche -->
+        <div class="side-image left-image">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Ordi.svg" alt="Personnage avec ordinateur">
+        </div>
+        
         <!-- Formulaire d'inscription -->
-        <main class="vibesic-main">
-            <div class="auth-form fadein-block">
-                <div class="form-container">
-                        <div class="form-blur-bg"></div>
-                    <h2 class="form-title">Créer un compte</h2>
+        <div class="auth-form fadein-block">
+            <div class="form-container">
+                <h2 class="form-title">Créer un compte</h2>
+                
+                <?php if (isset($errors) && !empty($errors)) : ?>
+                    <div class="alert-message error">
+                        <?php foreach ($errors as $error) : ?>
+                            ❌ <?= esc_html($error); ?><br>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+                
+                <form method="post" action="<?= esc_url($_SERVER['REQUEST_URI']); ?>" class="vibesic-form">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" name="username" id="username" value="<?= isset($_POST['username']) ? esc_attr($_POST['username']) : ''; ?>" required>
+                    </div>
                     
-                    <?php if (isset($errors) && !empty($errors)) : ?>
-                        <div class="alert-message error">
-                            <?php foreach ($errors as $error) : ?>
-                                ❌ <?= esc_html($error); ?><br>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" name="email" id="email" value="<?= isset($_POST['email']) ? esc_attr($_POST['email']) : ''; ?>" required>
+                    </div>
                     
-                    <div style="display: flex; align-items: flex-start; gap: 32px;">
-                        <div class="register-icons" style="display: flex; flex-direction: column; gap: 24px; align-items: flex-end; justify-content: flex-start; min-width: 70px;">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Ordi.svg" alt="Ordi" style="width:48px; height:auto;">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Crayon.svg" alt="Crayon" style="width:36px; height:auto;">
-                        </div>
-                        <div style="flex:1;">
-                            <form method="post" action="<?= esc_url($_SERVER['REQUEST_URI']); ?>" class="vibesic-form">
-                                <div class="form-group">
-                                    <label for="username">Nom d'utilisateur</label>
-                                    <input type="text" name="username" id="username" value="<?= isset($_POST['username']) ? esc_attr($_POST['username']) : ''; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Adresse email</label>
-                                    <input type="email" name="email" id="email" value="<?= isset($_POST['email']) ? esc_attr($_POST['email']) : ''; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Mot de passe</label>
-                                    <input type="password" name="password" id="password" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="confirm_password">Confirmer le mot de passe</label>
-                                    <input type="password" name="confirm_password" id="confirm_password" required>
-                                </div>
-                                <button type="submit" name="signup_submit" class="btn btn-orange submit-btn">S'INSCRIRE</button>
-                                <div class="form-footer">
-                                    Vous avez déjà un compte ? 
-                                     <a href="#" onclick="showLoginForm(); return false;">Se connecter</a>
-                                </div>
-                                <script>
-                                function showLoginForm() {
-                                    document.querySelector('.form-container').style.display = 'none';
-                                    document.getElementById('loginForm').style.display = 'block';
-                                }
-                                </script>
-                               
-                                <script>
-                                function showSignupForm() {
-                                    document.getElementById('loginForm').style.display = 'none';
-                                    document.querySelector('.form-container').style.display = 'block';
-                                }
-                                </script>
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm_password">Confirmer le mot de passe</label>
+                        <input type="password" name="confirm_password" id="confirm_password" required>
+                    </div>
+                    
+                    <button type="submit" name="signup_submit" class="btn btn-orange submit-btn">S'INSCRIRE</button>
+                    
+                    <div class="form-footer">
+                        Vous avez déjà un compte ? 
+                        <a href="<?= esc_url(home_url('/page-login')); ?>">SE CONNECTER</a>
+                    </div>
+                </form>
             </div>
-        </main>
-    <?php endif; ?>
+        </div>
+        
+        <!-- Personnage droit -->
+        <div class="side-image right-image">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Crayon.svg" alt="Personnage avec crayon">
+        </div>
+    </main>
 </div>
 
-
-
-
 <style>
-/
+/* Animation fade-in */
+.fadein-block {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 .vibesic-frontpage {
     min-height: calc(100vh - 200px);
@@ -127,112 +126,59 @@ get_header();
 
 .vibesic-main {
     text-align: center;
-    max-width: 1200px;
+    max-width: 1400px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 0;
 }
 
-.success-box {
-    text-align: center;
-    padding: 20px 0;
-}
-
-.success-box p {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-
-.success-box strong {
-    color: #F6843F;
-    font-weight: bold;
-}
-
-.action-buttons {
+/* Images sur les côtés */
+.side-image {
     display: flex;
-    gap: 20px;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 50px;
 }
 
-.btn {
-    padding: 12px 30px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    display: inline-block;
-    cursor: pointer;
-    border: 2px solid transparent;
-    padding: 9px 45px;
-    gap: 10px;
+.side-image img {
+    width: 100%;
+    height: auto;
 }
 
-.btn-orange {
-    background-color: #F6843F;
-    color: white;
-    border: 2px solid #F6843F;
-    padding: 9px 45px;
-    gap: 10px;
+.left-image {
+    margin-right: 110px;
+    margin-top: 500px;
 }
 
-.btn-orange:hover {
-    background-color: #F6843F;
-    border-color: #F6843F;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
-    padding: 10px 40px;
-    gap: 10px;
+.left-image img {
+    max-width: 200px;
 }
 
-.btn-outline {
-    background-color: transparent;
-    color: #F6843F;
-    border: 2px solid #F6843F;
+.right-image {
+    margin-left: 110px;
+    margin-top: 500px;
 }
 
-.btn-outline:hover {
-    background-color: #F6843F;
-    color: white;
+.right-image img {
+    max-width: 180px;
 }
 
-.alert-message {
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.alert-message.error {
-    background-color: #ffe5e5;
-    color: #d32f2f;
-    border: 2px solid #ffcdd2;
-}
-
+/* Formulaire */
 .auth-form {
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
 }
+
 .form-container {
     background-color: rgba(255, 255, 255, 0.95);
     padding: 50px;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    width: 100%;
-     
     border-radius: 18px;
-    background: #fff;
+    box-shadow: 0 0 10px #F6843F;
     position: relative;
     z-index: 2;
 }
-
 
 .form-title {
     color: #F6843F;
@@ -240,6 +186,8 @@ get_header();
     margin-bottom: 30px;
     text-align: center;
     font-weight: bold;
+    font-family: 'Coolvetica', sans-serif;
+    letter-spacing: 2px;
 }
 
 .vibesic-form {
@@ -267,18 +215,42 @@ get_header();
     font-size: 14px;
     outline: none;
     transition: border-color 0.3s;
+    box-sizing: border-box;
 }
 
 .form-group input:focus {
     border-color: #F6843F;
 }
 
+.btn {
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    font-family: 'Coolvetica', sans-serif;
+    letter-spacing: 2px;
+}
+
+.btn-orange {
+    background-color: #F6843F;
+    color: white;
+    padding: 12px 45px;
+}
+
+.btn-orange:hover {
+    background-color: #e57330;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
+}
+
 .submit-btn {
     width: 100%;
     margin-top: 10px;
-    border: none;
-    padding: 10px 40px;
-
 }
 
 .form-footer {
@@ -296,6 +268,31 @@ get_header();
 
 .form-footer a:hover {
     text-decoration: underline;
+}
+
+.alert-message {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.alert-message.error {
+    background-color: #ffe5e5;
+    color: #d32f2f;
+    border: 2px solid #ffcdd2;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .side-image {
+        display: none;
+    }
+    
+    .vibesic-main {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
@@ -316,19 +313,11 @@ get_header();
     .form-container {
         padding: 30px 20px;
     }
-
-    .action-buttons {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-    }
 }
 </style>
-
-
 
 <?php
 get_footer();
 ?>
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6DQD021OlistMZC1ZlUPq8cxEN4l4p3Gm5t9UJ0Z" crossorigin="anonymous"></script>

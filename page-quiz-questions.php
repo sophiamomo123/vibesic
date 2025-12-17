@@ -6,9 +6,13 @@
 get_header();
 ?>
 <head>
-    
     <link href="https://fonts.googleapis.com/css2?family=Coolvetica&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="MusticaPro.otf">
+        <!-- Bootstrap 5 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <meta name="description" content="Répondez aux questions du quiz interactif pour découvrir votre humeur du jour.">
+    <meta name="robots" content="index, follow">
+    <?php wp_head(); ?>
     
 
 
@@ -352,7 +356,7 @@ get_header();
 }
 
 .btn {
-    padding: 12px 35px;
+    padding: 12px 45px;
     border-radius: 25px;
     text-decoration: none;
     font-weight: bold;
@@ -366,9 +370,13 @@ get_header();
 
 .btn-orange {
     background-color: #F6843F;
-    color: white;
-    border: 2px solid #F6843F;
-    padding: 9px 45px;
+            color: black;
+            border: 2px solid #F6843F;
+            gap: 10px;
+            padding: 9px 45px;
+            border-radius: 25px;
+            cursor: pointer;
+           
 }
 
 .btn-orange:hover:not(:disabled) {
@@ -388,58 +396,78 @@ get_header();
     color: #F6843F;
     border: 2px solid #F6843F;
     padding: 12px 30px;
+    color: black;
 }
 
 .btn-outline:hover {
     background-color: #F6843F;
-    color: white;
+    color: black;
     padding: 12px 30px;
 }
 
 
 
-@media (max-width: 1024px) {
-    .options-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
+
+/* MOBILE FIRST */
+.question-title {
+    font-size: 22px;
+}
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.navigation-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 10px;
+}
+.btn {
+    width: 100%;
+    max-width: 300px;
+}
+@media (max-width: 480px) {
+    .logo-image {
+        height: 22px;
     }
-    
-    .question-title {
-        font-size: 28px;
+
+    .header-btn {
+        padding: 6px 12px; 
+        font-size: 11px; 
+        border-radius: 14px; 
+    }
+
+    .header-nav {
+        flex-direction: row !important;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
     }
 }
-
-@media (max-width: 768px) {
+/* TABLET */
+@media (min-width: 768px) {
     .question-title {
         font-size: 24px;
     }
-    
     .options-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 20px;
     }
-    
     .navigation-buttons {
-        flex-direction: column;
+        flex-direction: row;
         gap: 15px;
+        padding: 0 20px;
     }
-    
     .btn {
-        width: 100%;
+        width: auto;
         max-width: 300px;
     }
 }
-
-@media (max-width: 480px) {
-    .quiz-questions-page {
-        padding: 30px 15px;
-    }
-    
+/* DESKTOP */
+@media (min-width: 1024px) {
     .question-title {
-        font-size: 20px;
-    }
-    
-    .options-grid {
-        grid-template-columns: 1fr;
+        font-size: 28px;
     }
 }
 </style>
@@ -506,3 +534,5 @@ function showResults() {
 <?php
 get_footer();
 ?>
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6DQD021OlistMZC1ZlUPq8cxEN4l4p3Gm5t9UJ0Z" crossorigin="anonymous"></script>
