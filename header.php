@@ -50,9 +50,9 @@
     width: auto;
 }
        
-    
+.header-btn {
+    font-size: 12px; 
 }
-
 @media (max-width: 480px) {
     .logo-image {
         height: 30px;
@@ -71,7 +71,7 @@
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 8px;
             transition: all 0.3s ease;
             display: inline-block;
             cursor: pointer;
@@ -79,6 +79,9 @@
         }
 
         .btn-orange {
+            font-size: 12px; 
+            height: 30px;
+            width: 60px;
             background-color: #F6843F;
             color: white;
             border: 2px solid #F6843F;
@@ -90,10 +93,8 @@
         }
 
         .btn-orange:hover {
-            background-color: #F6843F
+            background-color: #F6843F;
             border-color: #F6843F;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
         }
 
         .btn-outline {
